@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Account;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
  class AuthController extends Controller 
  {
 
@@ -24,8 +25,9 @@ use Illuminate\Support\Facades\Hash;
             "data"=>[
                 "email" => $request->email,
                 "password" =>$request->password,
-                "name" => $accounts->name
-            ]
+                "name" => $accounts->name,
+            ],
+            "token" => $accounts->api_token,
             ],201);
             }
         }
@@ -38,7 +40,7 @@ use Illuminate\Support\Facades\Hash;
             'rounds' => 12,
         ]);
          $account->name = $request->name;
-
+         $account->api_token = Str::random(60);
          $check = Account::where('email',$request->email)->first();
          if($check){
              return response()->json(["message"=>"email has been existed","status"=>"200","success"=>"false"],201);
