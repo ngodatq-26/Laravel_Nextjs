@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Account;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
  class AuthController extends Controller 
  {
 
@@ -15,15 +16,15 @@ use App\Models\Account;
            return response()->json(["message" => 'Email không tồn tại !!',"status"=>"200","success"=>"false"],201);
         } 
         if($accounts){
-            $Password = Account::where('password',$request->password)->first();
-            if (!$Password) {
-               return response()->json(["message" => 'Password is incorrect !!',"status"=>"200","success"=>"false"],201);
+            $checkHash = Hash::check($request->password,$accounts->password);
+            if (!$checkHash) {
+               return response()->json(["message" => "password is incorrect!!!","status"=>"200","success"=>"false"],201);
             } else {
                return response()->json(["message" => 'OK!!',"status"=>"200","success"=>"true",
             "data"=>[
                 "email" => $request->email,
                 "password" =>$request->password,
-                "name" => $Password->name
+                "name" => $accounts->name
             ]
             ],201);
             }
@@ -33,7 +34,9 @@ use App\Models\Account;
      public function Register(Request $request) {
          $account = new Account;
          $account->email = $request->email;
-         $account->password = $request->password;
+         $account->password = Hash::make($request->password,[
+            'rounds' => 12,
+        ]);
          $account->name = $request->name;
 
          $check = Account::where('email',$request->email)->first();
@@ -41,7 +44,7 @@ use App\Models\Account;
              return response()->json(["message"=>"email has been existed","status"=>"200","success"=>"false"],201);
          } else {
              $account->save();
-             return response()->json(["message"=>"account created successfully","status"=>"200","success"=>"false"],201);
+             return response()->json(["message"=>"account created successfully","status"=>"200","success"=>"true"],201);
          }
      }
      
