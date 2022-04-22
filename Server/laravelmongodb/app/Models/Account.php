@@ -19,6 +19,7 @@ class Account extends Model
         'password',
         'api_token'
     ];
+    
     protected $dates = ['created_at','updated_at'];
 
     public function account(){

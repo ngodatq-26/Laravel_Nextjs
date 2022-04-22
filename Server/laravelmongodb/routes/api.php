@@ -4,6 +4,8 @@ use App\Http\Controllers\AccountController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Home\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,3 +29,8 @@ Route::group(['prefix'=>'auth'],function($router){
 Route::middleware('auth:api')->get('user', function() {
     return 'hello';
 });
+
+Route::group(['prefix' => 'home','middleware' => ['auth:api']],function($router) {
+    Route::post('/search',[HomeController::class,'SearchFriends']);
+});
+

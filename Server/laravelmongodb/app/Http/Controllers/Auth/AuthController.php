@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Account;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
- class AuthController extends Controller 
+class AuthController extends Controller 
  {
 
      public function Login(Request $request) {
@@ -41,6 +40,7 @@ use Illuminate\Support\Str;
         ]);
          $account->name = $request->name;
          $account->api_token = Str::random(60);
+         $account->friends = [];
          $check = Account::where('email',$request->email)->first();
          if($check){
              return response()->json(["message"=>"email has been existed","status"=>"200","success"=>"false"],201);

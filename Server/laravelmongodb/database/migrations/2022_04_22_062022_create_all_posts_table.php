@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Boolean;
 
 return new class extends Migration
 {
@@ -13,18 +14,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('accounts', function (Blueprint $table) {
+        Schema::create('all_posts', function (Blueprint $table) {
             $table->id();
-            $table->string('email');
-            $table->string('name');
-            $table->string('password');
+            $table->user_id();
+            $table->string('post_title');
+            $table->array('share');
+            $table->array('react');
+            $table->string('status');
             $table->timestamps();
-            $table->string('api_token',80)->after('password')->unique()
-            ->nullable()
-            ->default(null);
-            $table->int('notifications');
-            $table->int('messagesCount');
-            $table->array('friends');
         });
     }
 
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accounts');
+        Schema::dropIfExists('all_posts');
     }
 };
