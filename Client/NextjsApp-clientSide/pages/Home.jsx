@@ -3,7 +3,7 @@ import Footer from '../modules/home/components/Footer';
 import HeaderCustom from '../modules/home/components/HeaderCustom';
 import PostComponent from '../modules/home/components/PostComponent';
 const Home = () =>{
-    
+
     const a = [1,2,3]
     return (
       <div style={{display :'flex',flexDirection : 'column'}}>
