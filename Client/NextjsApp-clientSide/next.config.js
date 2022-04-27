@@ -4,6 +4,8 @@ const nextConfig = {
   compiler : {
     styledComponents : true,
   }
+  
 }
 
-module.exports = nextConfig
+module.exports = nextConfig;
+

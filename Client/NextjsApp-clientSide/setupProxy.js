@@ -5,6 +5,10 @@ module.exports = app => {
         createProxyMiddleware('/api/auth/login',{
             target : 'http://localhost:8000',
             changeOrigin:true
+        }),
+        createProxyMiddleware('/api/home/search',{
+            target : 'http://localhost:8000',
+            changeOrigin:true
         })
     )
 }

@@ -16,9 +16,14 @@ module.exports = {
       "./modules/auth/components/RegisterForm.jsx",
       "./modules/auth/components/SignInForm.jsx",
       "./modules/common/components/CustomButtonLoading.jsx",
-      "./modules/home/components/HeaderCustom.jsx",
-      "./modules/home/components/Footer.jsx",
-      "./modules/home/components/PostComponent.jsx"
+      "./modules/common/components/HeaderComponents/HeaderCustom.jsx",
+      "./modules/common/components/Footer.jsx",
+      "./modules/home/components/PostComponent.jsx",
+      "./modules/addFriends/components/AddFriend.jsx",
+      "./modules/addFriends/components/Friend.jsx",
+      "./modules/common/components/FriendsListPending/FriendList.jsx",
+      "./modules/common/components/ScaleHeader.jsx",
+      ".modules/profile/components/ProfileHeader.jsx"
     ],
   },
   theme: {

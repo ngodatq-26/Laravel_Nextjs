@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Logo from '../images/logo.png'
-import { fethAPI } from '../utils/fetch'
+import { fetchAPI } from '../utils/fetch'
 import { API_PATHS } from '../configs/apiConfigs'
 import axios from 'axios'
 import dynamic from 'next/dynamic'
@@ -24,14 +24,13 @@ const SignInPage = ({props}) =>{
 
     const onLogin = React.useCallback(async (email,password)=>{
       setLoading(true);
-      await fethAPI(API_PATHS.login,'POST',{email : email,password : password},true).then(user =>{
+      await fetchAPI(API_PATHS.login,'POST',{email : email,password : password},true).then(user =>{
         if(user.data.success == "true") {
           Cookies.set(ACCESS_TOKEN_KEY,user.data.token,{expires : 86400});
           dispatch(setTokenCookies(user.data.token))
           Router.push('/Home')
         }
         else {
-          console.log('ok')
           SetError(user.data.message)
         }
       })
