@@ -56,8 +56,10 @@ class AddFriendController extends Controller {
             "user_id" =>$auth->_id
         );
 
-        $account  = Account::where("_id",$auth->_id)->push('friends',$obj)->pull('friends_request',$obj);
-        $friend = Account::where("_id",$request->_id)->push('friends',$obj_main)->pull('friends_pendding',$obj_main);
+        $account  = Account::where("_id",$auth->_id)->push('friends',$obj);
+        $account2  = Account::where("_id",$auth->_id)->pull('friends_request',$obj);
+        $friend = Account::where("_id",$request->_id)->push('friends',$obj_main);
+        $friend = Account::where("_id",$request->_id)->pull('friends_pendding',$obj_main);
         return "success";
     }
 
@@ -78,4 +80,22 @@ class AddFriendController extends Controller {
         return "success";
     }
 
+    //hàm không chấp nhận request kết bạn
+
+    public function NotAcceptRequestFriend (Request $request) {
+        $auth = auth('api') ->user();;
+        $obj = (object) array(
+            "name"=>$request->name,
+            "user_id" => $request->_id
+        );
+        
+        $obj_main = (object) array(
+            "name"=>$auth->name,
+            "user_id" =>$auth->_id
+        );
+
+        $account =  Account::where("_id",$auth->_id)->pull('friends_request',$obj);
+        $friend = Account::where("_id",$request->_id)->pull('friends_pendding',$obj_main);
+        return "success";
+    }
 }

@@ -44,6 +44,7 @@ Route::group(['prefix' => 'profile','middleware' => ['auth:api']],function($rout
 Route::group(['prefix' => 'friends','middleware' => ['auth:api']],function($router) {
     Route::post('/add_pendding',[AddFriendController::class,'SendAddFriend']);
     Route::post('/delete_pendding',[AddFriendController::class,'DeleteAddFriend']);
-    Route::post('/accept',[AddFriendController::class,'AcceptFriend']);
+    Route::post('/cancel',[AddFriendController::class,'NotAcceptRequestFriend']);
     Route::post('/delete',[AddFriendController::class,'DeleteFriend']);
+    Route::post('/add',[AddFriendController::class,'AddFriend']);
 });
