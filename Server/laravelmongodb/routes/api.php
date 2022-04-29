@@ -5,7 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Home\HomeController;
-
+use App\Http\Controllers\AddFriend\AddFriendController;
+use App\Http\Controllers\Profile\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,5 +33,17 @@ Route::middleware('auth:api')->get('user', function() {
 
 Route::group(['prefix' => 'home','middleware' => ['auth:api']],function($router) {
     Route::post('/search',[HomeController::class,'SearchFriends']);
+    Route::get('/friend_request',[HomeController::class,'getFriendsRequest']);
 });
 
+Route::group(['prefix' => 'profile','middleware' => ['auth:api']],function($router) {
+    Route::any('/',[ProfileController::class,'getProfile']);
+});
+
+
+Route::group(['prefix' => 'friends','middleware' => ['auth:api']],function($router) {
+    Route::post('/add_pendding',[AddFriendController::class,'SendAddFriend']);
+    Route::post('/delete_pendding',[AddFriendController::class,'DeleteAddFriend']);
+    Route::post('/accept',[AddFriendController::class,'AcceptFriend']);
+    Route::post('/delete',[AddFriendController::class,'DeleteFriend']);
+});

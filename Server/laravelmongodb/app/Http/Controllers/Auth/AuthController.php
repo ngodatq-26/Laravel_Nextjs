@@ -41,6 +41,9 @@ class AuthController extends Controller
          $account->name = $request->name;
          $account->api_token = Str::random(60);
          $account->friends = [];
+         $account->friends_pendding = [];
+         $account->info = [];
+         $account->friends_request = [];
          $check = Account::where('email',$request->email)->first();
          if($check){
              return response()->json(["message"=>"email has been existed","status"=>"200","success"=>"false"],201);
