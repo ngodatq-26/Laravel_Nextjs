@@ -30,6 +30,7 @@
     "react-hook-form": "^7.29.0",
     "react-redux": "^7.2.8",
     "redux": "^4.1.2",
+    "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
     "redux-toolkit": "^1.1.2",

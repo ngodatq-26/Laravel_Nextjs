@@ -1,23 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { API_PATHS } from '../../../configs/apiConfigs';
 import { fetchAPI } from '../../../utils/fetch';
 import SearchAll from '../../common/components/SearchAllButton'
 import Friend from './Friend';
 
 const AddFriends = (props) =>{
-
-    const [dataFriends,setDataFriends] = React.useState();
-    React.useEffect(() => {
-        async function fetchData () {
-            await fetchAPI(API_PATHS.search,'POST',{search : props.search},true)
-            .then(res =>{
-               setDataFriends(res.data.data);
-            })
-        }
-        if(props.search) {
-            fetchData();
-        }
-    },[props.search]);
 
 
     return (
@@ -29,10 +17,10 @@ const AddFriends = (props) =>{
                    </div>
                 </li>
                 {
-                    dataFriends ? dataFriends.map((e,index) =>{
+                    props.dataFriends ? props.dataFriends.map((e,index) =>{
                         return (
                             <div key={index}>
-                                <Friend name={e.name} email ={e.email}/>
+                                <Friend name={e.name} email ={e.email} _id={e._id}/>
                             </div>
                         )
                     })   : null

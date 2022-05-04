@@ -21,7 +21,7 @@ const SignInPage = ({props}) =>{
     const [error,SetError] = React.useState();
     const counter = useSelector((state) => state.authReducer.token);
     const dispatch = useDispatch();
-
+    
     const onLogin = React.useCallback(async (email,password)=>{
       setLoading(true);
       await fetchAPI(API_PATHS.login,'POST',{email : email,password : password},true).then(user =>{
@@ -59,8 +59,8 @@ const SignInPage = ({props}) =>{
 
 //example account : email : Khanhtrinh2001checkm@gmail.com password : Datdatdat
 export async function getServerSideProps(context) {
-  const isLogin =  Cookies.get(ACCESS_TOKEN_KEY)
-  if(isLogin) {
+  const token = context.req.headers.cookie;
+  if(token) {
     return {
       redirect: {
         destination: '/Home',

@@ -7,23 +7,12 @@ import IconNotifications from './IconNotifications';
 import SearchInput from './SearchInput';
 import ScaleHeader from '../ScaleHeader';
 import IconSetting from './IconSetting';
+import Personal from './Personal';
 export default function HeaderCustom(props) {
 
     const [dataFriend,setDataFriend] = React.useState();
-    const [profile,setProfile] = React.useState();
-
-    React.useEffect(()=>{
-      async function fetchData() {
-        const res = await fetchAPI(API_PATHS.getProfile,'GET',{},true);
-        setProfile(res.data);
-      }
-      fetchData();
-    },[])
-
-    console.log('ok')
-    console.log(profile)
+    
     return (<>
-        { !profile ? <ScaleHeader /> : 
         <header className="w-full shadow-lg bg-white dark:bg-gray-700 items-center h-16 z-40">
             <div className="relative z-20 flex flex-col justify-center h-full px-3 mx-auto flex-center">
                 <div className="relative items-center pl-1 flex w-full lg:max-w-68 sm:pr-2 sm:ml-0">
@@ -41,11 +30,13 @@ export default function HeaderCustom(props) {
                             </a>
                     </div>
                     <div className="container relative left-0 z-50 flex w-3/4 ">
-                        {profile.data.name}
+                        <a style={{marginTop :'7px',marginRight :'30px'}}>{props.name}</a>
+                        <Personal />   
                     </div>
+                    
                 </div>
             </div>
-        </header> }
+        </header> 
         </>
     )
 }

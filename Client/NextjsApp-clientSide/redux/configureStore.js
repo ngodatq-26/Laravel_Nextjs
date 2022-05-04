@@ -2,14 +2,19 @@ import { configureStore,combineReducers } from "@reduxjs/toolkit";
 import { createWrapper, HYDRATE } from "next-redux-wrapper";
 import authReducer from "../modules/auth/redux/authReducer";
 import masterReducer from "./reducer";
+import storage from "redux-persist/lib/storage";
+import { createStore } from "redux";
+import thunkMiddleware from 'redux-thunk';
+import { applyMiddleware } from "redux";
+import { persistStore, persistReducer } from 'redux-persist'
 
-const store = configureStore({
-  reducer : masterReducer,
-  devTools : true
-})
+const persistConfig = {
+  key: 'root',
+  storage
+}
 
-export const makeStore =() => store;
+const persistedReducer = persistReducer(persistConfig, masterReducer)
 
-const wrapper = createWrapper(makeStore,{debug : true});
+export const store = createStore(persistedReducer)
 
-export default wrapper;
+export const persistor = persistStore(store)

@@ -1,10 +1,18 @@
 import '../styles/globals.css'
-import wrapper from "../redux/configureStore"
+import {wrapper} from "../redux/configureStore"
 import React from 'react'
-import { Router } from 'next/router'
-
+import App from 'next/app'
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistor } from '../redux/configureStore'
+import { Provider } from 'react-redux'
+import { store } from '../redux/configureStore'
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+  <Provider store={store}>
+  <PersistGate loading={null} persistor={persistor}>
+     <Component {...pageProps} />
+  </PersistGate>
+  </Provider>)
 }
 
-export default wrapper.withRedux(MyApp)
+export default MyApp

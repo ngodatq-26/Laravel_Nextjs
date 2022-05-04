@@ -23,7 +23,8 @@ module.exports = {
       "./modules/addFriends/components/Friend.jsx",
       "./modules/common/components/FriendsListPending/FriendList.jsx",
       "./modules/common/components/ScaleHeader.jsx",
-      ".modules/profile/components/ProfileHeader.jsx"
+      ".modules/profile/components/ProfileHeader.jsx",
+      "./modules/common/components/Friends/MyFriendsList.jsx"
     ],
   },
   theme: {
