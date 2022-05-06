@@ -7,11 +7,17 @@
     "require": {
         "php": "^8.0.2",
         "barryvdh/laravel-ide-helper": "^2.12",
+        "google/apiclient": "^2.12",
+        "google/auth": "^1.21",
         "guzzlehttp/guzzle": "^7.2",
         "jenssegers/mongodb": "^3.9",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "league/flysystem-aws-s3-v3": "^3.0",
+        "masbug/flysystem-google-drive-ext": "^2.2",
+        "pulkitjalan/google-apiclient": "^6.0",
+        "spatie/laravel-backup": "^8.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

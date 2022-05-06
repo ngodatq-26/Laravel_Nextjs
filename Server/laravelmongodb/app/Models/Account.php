@@ -25,4 +25,8 @@ class Account extends Model
     public function account(){
         
     }
+
+    public function posts() {
+        $this->hasMany(AllPosts ::class);
+    }
 }

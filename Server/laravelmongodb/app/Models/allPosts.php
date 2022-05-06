@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model;
 
-class allPosts extends Model
+class AllPosts extends Model
 {
     protected $connection ="mongodb";
     protected $collection = "all_posts";
@@ -15,4 +15,10 @@ class allPosts extends Model
         'react',
         'comment',
     ];
+
+    protected $dates = ['created_at','updated_at'];
+
+    public function account() {
+        return $this->belongsTo(Account::class,"user_id","_id");
+    }
 }

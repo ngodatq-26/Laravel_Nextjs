@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Facade;
 
 return [
 
+    
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -141,6 +142,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        App\Providers\AppServiceProvider::class,
         Jenssegers\Mongodb\MongodbServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,

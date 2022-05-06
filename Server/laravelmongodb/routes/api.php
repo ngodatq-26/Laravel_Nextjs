@@ -6,7 +6,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\AddFriend\AddFriendController;
+use App\Http\Controllers\Home\PostController;
 use App\Http\Controllers\Profile\ProfileController;
+use Illuminate\Support\Facades\Storage;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,6 +37,7 @@ Route::middleware('auth:api')->get('user', function() {
 Route::group(['prefix' => 'home','middleware' => ['auth:api']],function($router) {
     Route::post('/search',[HomeController::class,'SearchFriends']);
     Route::get('/friend_request',[HomeController::class,'getFriendsRequest']);
+    Route::any('/create_post',[PostController::class,'CreatePost']);
 });
 
 Route::group(['prefix' => 'profile','middleware' => ['auth:api']],function($router) {
@@ -47,4 +51,9 @@ Route::group(['prefix' => 'friends','middleware' => ['auth:api']],function($rout
     Route::post('/cancel',[AddFriendController::class,'NotAcceptRequestFriend']);
     Route::post('/delete',[AddFriendController::class,'DeleteFriend']);
     Route::post('/add',[AddFriendController::class,'AddFriend']);
+});
+
+Route::get('/test',function () {
+    Storage::disk('google')->put('test.txt','heelo');
+    return 'ok';
 });
