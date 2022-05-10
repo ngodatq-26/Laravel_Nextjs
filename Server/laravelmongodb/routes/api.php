@@ -30,20 +30,17 @@ Route::group(['prefix'=>'auth'],function($router){
     Route::post('/register',[AuthController::class,'Register']);
 });
 
-Route::middleware('auth:api')->get('user', function() {
-    return 'hello';
-});
-
 Route::group(['prefix' => 'home','middleware' => ['auth:api']],function($router) {
     Route::post('/search',[HomeController::class,'SearchFriends']);
     Route::get('/friend_request',[HomeController::class,'getFriendsRequest']);
     Route::any('/create_post',[PostController::class,'CreatePost']);
+    Route::any('/delete_post',[PostController::class,'DeletePost']);
+    Route::any('/images_post',[PostController::class,'UploadImages']);
 });
 
 Route::group(['prefix' => 'profile','middleware' => ['auth:api']],function($router) {
     Route::any('/',[ProfileController::class,'getProfile']);
 });
-
 
 Route::group(['prefix' => 'friends','middleware' => ['auth:api']],function($router) {
     Route::post('/add_pendding',[AddFriendController::class,'SendAddFriend']);
@@ -53,7 +50,4 @@ Route::group(['prefix' => 'friends','middleware' => ['auth:api']],function($rout
     Route::post('/add',[AddFriendController::class,'AddFriend']);
 });
 
-Route::get('/test',function () {
-    Storage::disk('google')->put('test.txt','heelo');
-    return 'ok';
-});
+

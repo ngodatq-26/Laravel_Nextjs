@@ -1,3 +1,4 @@
+<?php
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Storage;
@@ -8,7 +9,7 @@ class AppServiceProvider extends ServiceProvider { // can be a custom ServicePro
     public function boot(){
         // ...
         try {
-            \Storage::extend('google', function($app, $config) {
+            Storage::extend('google', function($app, $config) {
                 $options = [];
 
                 if (!empty($config['teamDriveId'] ?? null)) {

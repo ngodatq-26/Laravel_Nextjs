@@ -41,5 +41,9 @@ class HomeController extends Controller {
                                   "data"=> $account[0]->friends_request,
                                 ],201);
     }
+
+    public function Test() {
+      return 'ok';
+    }
 }
 
