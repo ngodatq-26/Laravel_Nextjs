@@ -16,3 +16,11 @@ export default function Home() {
     <HomePage />
   )
 }
+export async function getStaticProps(context) {
+  return {
+    redirect: {
+      destination: '/Home',
+      permanent: false,
+    },
+  }
+}

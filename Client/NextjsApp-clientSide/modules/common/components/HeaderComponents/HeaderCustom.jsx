@@ -30,7 +30,6 @@ export default function HeaderCustom(props) {
                             </a>
                     </div>
                     <div className="container relative left-0 z-50 flex w-3/4 ">
-                        <a style={{marginTop :'7px',marginRight :'30px'}}>{props.name}</a>
                         <Personal />   
                     </div>
                     

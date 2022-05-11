@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { setUserAction } from '../modules/common/redux/commonReducer';
 import MyFriendsList from '../modules/common/components/Friends/MyFriendsList';
+import ProfileMini from '../modules/common/components/ProfileMini/ProfileMini';
 const Home = (props) =>{
   
     const [loading,setLoading] = React.useState(false);
@@ -26,7 +27,9 @@ const Home = (props) =>{
       <div style={{display :'flex',flexDirection : 'column'}}>
         <HeaderCustom name={props.data.name} />
         <div style={{display :'flex',flexDirection:'row'}}>
-          <div style={{display : 'flex',flex :'0.5'}}></div>
+          <div style={{display : 'flex',flex :'0.5'}}>
+            <ProfileMini />
+          </div>
           <div className="bg-white mt-3" style={{display : 'flex',flex :'1',flexDirection:'column'}}>
           <PostStatus />
             <PostComponent />

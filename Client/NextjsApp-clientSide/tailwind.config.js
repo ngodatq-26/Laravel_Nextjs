@@ -24,7 +24,8 @@ module.exports = {
       "./modules/common/components/FriendsListPending/FriendList.jsx",
       "./modules/common/components/ScaleHeader.jsx",
       ".modules/profile/components/ProfileHeader.jsx",
-      "./modules/common/components/Friends/MyFriendsList.jsx"
+      "./modules/common/components/Friends/MyFriendsList.jsx",
+      "./modules/common/components/ProfileMini/ProfileMini.jsx"
     ],
   },
   theme: {
