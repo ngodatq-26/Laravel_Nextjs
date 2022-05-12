@@ -36,6 +36,7 @@ Route::group(['prefix' => 'home','middleware' => ['auth:api']],function($router)
     Route::any('/create_post',[PostController::class,'CreatePost']);
     Route::any('/delete_post',[PostController::class,'DeletePost']);
     Route::any('/images_post',[PostController::class,'UploadImages']);
+    Route::any('/get_posts',[PostController::class,'GetPostsById']);
 });
 
 Route::group(['prefix' => 'profile','middleware' => ['auth:api']],function($router) {
@@ -50,4 +51,8 @@ Route::group(['prefix' => 'friends','middleware' => ['auth:api']],function($rout
     Route::post('/add',[AddFriendController::class,'AddFriend']);
 });
 
+Route::any('/test',function(Request $request){
+    $url = Storage::disk('google')->allFiles();
+    dump($url);
+});
 
