@@ -27,7 +27,7 @@ const Home = (props) =>{
       <div style={{display :'flex',flexDirection : 'column'}}>
         <HeaderCustom name={props.data.name} />
         <div style={{display :'flex',flexDirection:'row'}}>
-          <div style={{display : 'flex',flex :'0.5'}}>
+          <div style={{display : 'flex',flex :'0.4'}}>
             <ProfileMini />
           </div>
           <div className="bg-white mt-3" style={{display : 'flex',flex :'1',flexDirection:'column'}}>
@@ -36,7 +36,7 @@ const Home = (props) =>{
             <PostComponent />
             <PostComponent />
           </div>
-          <div style={{display : 'flex',flex :'0.5',flexDirection:'column',margin : '20px'}}>
+          <div style={{display : 'flex',flex :'0.3',flexDirection:'column',margin : '20px'}}>
             <FriendList friendsRequest = {props.friendsRequest}/>
             <MyFriendsList />
           </div>
