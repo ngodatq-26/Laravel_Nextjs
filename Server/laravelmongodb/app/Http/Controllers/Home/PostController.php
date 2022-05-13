@@ -28,14 +28,41 @@ class PostController extends Controller {
         ]);
     } 
 
+    public function getIdFriends($obj) {
+        return $obj->user_id;
+    }
+
     public function GetPostsById(Request $request) {
         $auth = auth('api') ->user();
-        $post = AllPosts::where('user_id',$request->_id)->get();
+        $post = AllPosts::where('user_id',$request->user_id)->get();
         return response()->json([
             "success" => true,
             "message" => "post create successfully",
             "posts_info"=> $post
         ]);
+    }
+
+    public function GetPostsFriends() {
+        try{
+            $auth = auth('api')->user();
+            $obj = array();
+            for ($i = 0; $i < count($auth->friends);$i ++) { 
+                $post = AllPosts::orderBy('updated_at','desc')->where('user_id',$auth->friends[$i]['user_id'])->get();
+                $array = json_decode(json_encode($post), true);
+                $obj = array_merge($obj,$array);
+            }
+
+            return response() -> json([
+                "success" => true,
+                "message" => "post create successfully",
+                "all_posts_info"=> $obj
+            ]);
+        } catch(Exception $e) {
+            return response() -> json([
+                "success" => false,
+                "message" => $e,
+            ]);
+        }
     }
 
     public function DeletePost(Request $request) {
@@ -62,7 +89,8 @@ class PostController extends Controller {
                 "success" => true,
                 "message" => "File successfully uploaded",
                 "images" => [
-                    "name" => $path,
+                    "path" => $path,
+                    "name" => $name,
                     "user" => $auth->_id,
                 ]
             ]);
@@ -80,4 +108,13 @@ class PostController extends Controller {
       }
     }
 
+    public function DeleteImages(Request $request) {
+        try {
+            $auth = auth('api') ->user();
+
+        } 
+        catch (Exception $e) {
+
+        }
+    }
 }

@@ -28,7 +28,7 @@ class ProfileController extends Controller {
 
 
     public function getProfileById(Request $request) {
-        $account = Account::where("_id",$request->id)->take(1)->get();
+        $account = Account::where("_id",$request->_id)->take(1)->get();
         if($account) {
             return response() -> json(["status"=>"200","success"=>"true","data" =>
               [
