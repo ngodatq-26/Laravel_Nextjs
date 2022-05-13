@@ -36,10 +36,9 @@ const PostStatus = () => {
   const handleClose = () => setOpen(false);  
 
 
-  const postData = React.useCallback(async () =>{
+  const postData = async () =>{
       setLoadingPost(true);
       const res = await (await fetchAPI(API_PATHS.createPost,'POST',{...dataPost,images : images},true))
-      console.log(res);
       setLoadingPost(false);
       setSuccess(true);
       setDataPost({
@@ -50,7 +49,7 @@ const PostStatus = () => {
       });
       setOpen(false);
       setImages([]);
-  },[])
+  }
 
   React.useEffect(() => {
       setTimeout(() => setSuccess(false),3000)
@@ -73,10 +72,7 @@ const PostStatus = () => {
         setLoading(false);
     }
   }
-
-  console.log(open)
-
-  console.log(images)
+  
   return (
     <form className="bg-white shadow rounded-lg mb-6 p-4">
             <input  

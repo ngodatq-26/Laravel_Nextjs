@@ -25,7 +25,8 @@ module.exports = {
       "./modules/common/components/ScaleHeader.jsx",
       ".modules/profile/components/ProfileHeader.jsx",
       "./modules/common/components/Friends/MyFriendsList.jsx",
-      "./modules/common/components/ProfileMini/ProfileMini.jsx"
+      "./modules/common/components/ProfileMini/ProfileMini.jsx",
+      "./modules/common/components/Skeleton.jsx"
     ],
   },
   theme: {

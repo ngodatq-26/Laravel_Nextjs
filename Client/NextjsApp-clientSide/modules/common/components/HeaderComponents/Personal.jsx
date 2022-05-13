@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 
 const Personal = () => {
   const user = useSelector((state) =>state.commonReducer.user);
-  console.log(user)
   return (
     <div className="block">
             <div className="inline relative">

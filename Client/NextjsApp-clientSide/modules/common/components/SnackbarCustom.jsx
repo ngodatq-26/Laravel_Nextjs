@@ -30,8 +30,7 @@ const SnackbarCustom = (props) =>{
           </IconButton>
         </React.Fragment>
     );
-    return (
-
+    return (<>
     <Stack spacing={2} sx={{ width: '100%' }}>
         <Snackbar 
         open={open}
@@ -40,7 +39,7 @@ const SnackbarCustom = (props) =>{
         action={action}
         severity={props.alert}
         ><Alert severity={props.alert}>{props.title}</Alert></Snackbar>
-    </Stack>
+    </Stack></>
     )
 }
 

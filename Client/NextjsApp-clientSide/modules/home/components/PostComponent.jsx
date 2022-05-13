@@ -1,15 +1,38 @@
 import React from 'react';
 import Image from 'next/image';
-const PostComponent = () =>{
+import { fetchAPI } from '../../../utils/fetch';
+import { API_PATHS } from '../../../configs/apiConfigs';
+import Skeleton from '../../common/components/Skeleton';
+const PostComponent = (props) =>{
+
+    console.log(props);
+    const [loading,setLoading] = React.useState(false);
+    const [data,setData] = React.useState();
+
+    React.useEffect(()=>{
+        const fetchData = async () => {
+            setLoading(true)
+            await fetchAPI(API_PATHS.getProfileById,'POST',{ _id : props.user_id},true)
+            .then((res) =>{
+                setData(res)
+            })
+            setLoading(false)
+        }
+        fetchData()
+    },[])
+
+    console.log(data)
 
     return (
+        <>
+      {loading || !data ? <Skeleton /> : 
       <div className="bg-white shadow rounded-lg mb-6">
             <div className="flex flex-row px-2 py-3 mx-3">
                 <div className="w-auto h-auto rounded-full">
                     <img className="w-12 h-12 object-cover rounded-full shadow cursor-pointer" alt="User avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" />
                 </div>
                 <div className="flex flex-col mb-2 ml-4 mt-1">
-                    <div className="text-gray-600 text-sm font-semibold">John Doe</div>
+                    <div className="text-gray-600 text-sm font-semibold">{data.data.data.name}</div>
                     <div className="flex w-full mt-1">
                         <div className="text-blue-700 font-base text-xs mr-1 cursor-pointer">
                             SEO
@@ -23,27 +46,18 @@ const PostComponent = () =>{
             <div className="border-b border-gray-100"></div> 
             <div className="text-gray-400 font-medium text-sm mb-7 mt-6 mx-3 px-2">
                 <div className="grid grid-cols-6 col-span-2   gap-2  ">
-                    <div className=" overflow-hidden rounded-xl col-span-3 max-h-[14rem]">
-                        <img className="h-full w-full object-cover " src="https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=735&amp;q=80" alt=""/>
-                    </div>
-                    <div className=" overflow-hidden rounded-xl col-span-3 max-h-[14rem]">
-                        <img className="h-full w-full object-cover  " src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1399&amp;q=80" alt=""/>
-                    </div>
-                    <div className=" overflow-hidden rounded-xl col-span-2 max-h-[10rem]">
-                        <img className="h-full w-full object-cover " src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80" alt=""/>
-                    </div>
-                    <div className=" overflow-hidden rounded-xl col-span-2 max-h-[10rem]">
-                        <img className="h-full w-full object-cover " src="https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80" alt=""/>
-                    </div>
-                    <div className="relative overflow-hidden rounded-xl col-span-2 max-h-[10rem]">
-                        <div className="text-white text-xl absolute inset-0  bg-slate-900/80 flex justify-center items-center">
-                        + 23
-                        </div>
-                        <img className="h-full w-full object-cover " src="https://images.unsplash.com/photo-1560393464-5c69a73c5770?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=765&amp;q=80" alt=""/>
-                    </div>
+                    {
+                        props.images ? props.images.map((e,index) => {
+                            return  (
+                                <div key={index} className=" overflow-hidden rounded-xl col-span-3 max-h-[14rem]">
+                                    <Image className="h-full w-full object-cover " width={500} height={400} src={require(`../../../../../Server/laravelmongodb/storage/app/${e.path}`)} />
+                                </div>
+                            )
+                        }) : null
+                    }
                 </div>
             </div>
-            <div className="text-gray-500 text-sm mb-6 mx-3 px-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500</div>
+            <div className="text-gray-500 text-sm mb-6 mx-3 px-2">{props.post_main}</div>
             <div className="flex justify-start mb-4 border-t border-gray-100">
                 <div className="flex w-full mt-1 pt-2 pl-5">
                     <span className="bg-white transition ease-out duration-300 hover:text-red-500 border w-8 h-8 px-2 pt-2 text-center rounded-full text-gray-400 cursor-pointer mr-2">
@@ -103,7 +117,7 @@ const PostComponent = () =>{
                 </span>
                     <input type="search" className="w-full py-2 pl-4 pr-10 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400" style={{borderRadius: "25px"}} placeholder="Post a comment..." autoComplete="off"/>
             </div>
-      </div>
+      </div>}</>
     )
 }
 

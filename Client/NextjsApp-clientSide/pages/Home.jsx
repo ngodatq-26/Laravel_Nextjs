@@ -19,6 +19,8 @@ const Home = (props) =>{
     const state = useSelector(state => state)
     const dispatch = useDispatch();
 
+    console.log(props)
+    console.log(state)
     React.useEffect(() =>{
       dispatch(setUserAction(props.data))
     },[])
@@ -31,10 +33,16 @@ const Home = (props) =>{
             <ProfileMini />
           </div>
           <div className="bg-white mt-3" style={{display : 'flex',flex :'1',flexDirection:'column'}}>
-          <PostStatus />
-            <PostComponent />
-            <PostComponent />
-            <PostComponent />
+            <PostStatus />
+            {
+              props.post ? props.post.map((e,index) => {
+                return (
+                  <div key={index}>
+                  <PostComponent post_main ={e.post_main} images ={e.images} user_id ={e.user_id} />
+                  </div>
+                )
+              }) : null
+            }
           </div>
           <div style={{display : 'flex',flex :'0.3',flexDirection:'column',margin : '20px'}}>
             <FriendList friendsRequest = {props.friendsRequest}/>
@@ -64,8 +72,16 @@ export async function getServerSideProps(context) {
       'Authorization': 'Bearer ' + token.slice(6)
     }
   })
-
+  
+  
   const res_friends_request = await fetch(API_PATHS.getFriendsRequest,{
+    headers : {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token.slice(6)
+    }
+  })
+
+  const res_posts = await fetch(API_PATHS.getAllPostFriends,{
     headers : {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token.slice(6)
@@ -74,8 +90,11 @@ export async function getServerSideProps(context) {
 
   const result = await res.json();
   const result2 = await res_friends_request.json();
+  const result3 = await res_posts.json();
+
   return {
     props: {
+      post : result3.all_posts_info,
       data : result.data,
       cookies : token.slice(6),
       friendsRequest : result2.data,
