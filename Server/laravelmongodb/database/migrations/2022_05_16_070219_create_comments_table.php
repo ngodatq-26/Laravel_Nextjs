@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use phpDocumentor\Reflection\Types\Boolean;
 
 return new class extends Migration
 {
@@ -14,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('all_posts', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->id('user_id');
+            $table->string('text');
             $table->string('name');
-            $table->string('post_main');
-            $table->array('share');
-            $table->array('react');
-            $table->string('title');
-            $table->array('images');
+            $table->index('user_id');
+            $table->index('post_id');
             $table->timestamps();
         });
     }
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('all_posts');
+        Schema::dropIfExists('comments');
     }
 };

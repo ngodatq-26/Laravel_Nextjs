@@ -5,20 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Eloquent\Model;
 
-class AllPosts extends Model
+class Comments extends Model
 {
     protected $connection ="mongodb";
-    protected $collection = "all_posts";
+    protected $collection = "comments";
     protected $fillable = [
-        'post_title',
-        'status',
-        'react',
-        'comment',
+        'text'
     ];
 
     protected $dates = ['created_at','updated_at'];
 
-    public function account() {
-        return $this->belongsTo(Account::class,"id","user_id");
-    }
 }

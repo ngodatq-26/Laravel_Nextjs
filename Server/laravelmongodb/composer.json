@@ -17,6 +17,7 @@
         "league/flysystem-aws-s3-v3": "^3.0",
         "masbug/flysystem-google-drive-ext": "^2.2",
         "pulkitjalan/google-apiclient": "^6.0",
+        "pusher/pusher-php-server": "^7.0",
         "spatie/laravel-backup": "^8.1"
     },
     "require-dev": {

@@ -8,13 +8,13 @@ use App\Models\AllPosts;
 use Exception;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-
 class PostController extends Controller {
 
     public function CreatePost(Request $request) {
         $auth = auth('api') ->user();
         $post = new AllPosts; 
         $post->user_id = $auth->_id;
+        $post->name = $auth->name;
         $post->post_main = $request->main;
         $post->share = $request->share;
         $post->react = $request->react;
