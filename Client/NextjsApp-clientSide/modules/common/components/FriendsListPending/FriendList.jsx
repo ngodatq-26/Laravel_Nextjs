@@ -6,7 +6,7 @@ const FriendList = (props) => {
   return (
     <div className="" style={{width : '100%'}}>
       <div className="flex-row gap-4 flex justify-center items-center ">
-        <p className="text-blue-600" style={{fontSize :'20px'}}>All Requests</p>
+        <p className="text-blue-600" style={{fontSize :'20px'}}></p>
       </div> 
       <div >
          {

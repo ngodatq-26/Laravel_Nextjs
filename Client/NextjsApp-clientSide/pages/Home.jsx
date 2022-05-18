@@ -18,9 +18,7 @@ const Home = (props) =>{
     const [loading,setLoading] = React.useState(false);
     const state = useSelector(state => state)
     const dispatch = useDispatch();
-
     console.log(props)
-    console.log(state)
     React.useEffect(() =>{
       dispatch(setUserAction(props.data))
     },[])
@@ -38,7 +36,7 @@ const Home = (props) =>{
               props.post ? props.post.map((e,index) => {
                 return (
                   <div key={index}>
-                  <PostComponent post_main ={e.post_main} images ={e.images} user_id ={e.user_id} />
+                  <PostComponent post_main ={e.post_main} images ={e.images} user_id ={e.user_id} name={e.name} post_id ={e._id} />
                   </div>
                 )
               }) : null

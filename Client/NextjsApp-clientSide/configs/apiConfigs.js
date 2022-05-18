@@ -5,6 +5,8 @@ export const API_PATHS = {
     uploadImagesPost : 'http://localhost:8000/api/home/images_post',
     createPost :'http://127.0.0.1:8000/api/home/create_post',
     getPostById : 'http://127.0.0.1:8000/api/home/get_posts',
+    createComment : 'http://localhost:8000/api/home/create_comment',
+    getAllComment :'http://localhost:8000/api/home/get_all_comment',
     getAllPostFriends : 'http://127.0.0.1:8000/api/home/get_posts_friends',
     getProfile : 'http://127.0.0.1:8000/api/profile',
     getProfileById :'http://localhost:8000/api/profile/user',
