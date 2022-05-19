@@ -3,28 +3,20 @@ import React from 'react'
 const Skeleton = () => {
   return (
 
-<div class="bg-white rounded mx-auto  shadow-lg" style={{marginTop : '20px'}}>
-    <div class="bg-gray-200 w-full h-48 p-3 overflow-hidden animate-pulse">
-    </div>
-    <div class="h- p-3">
-        <div class="grid grid-cols-3 gap-4 mt-2">
-            <div class="h-8 bg-gray-200 rounded animate-pulse">
+
+<div className=" h-24 border-2 rounded-md mx-auto">
+    <div className="flex animate-pulse flex-row items-center h-full justify-center space-x-5">
+        <div className="w-12 bg-gray-300 h-12 rounded-full ">
+        </div>
+        <div className="flex flex-col space-y-3">
+            <div className="w-36 bg-gray-300 h-6 rounded-md ">
             </div>
-            <div class="h-8 bg-gray-200 rounded animate-pulse">
-            </div>
-            <div class="h-8 bg-gray-200 rounded animate-pulse">
-            </div>
-            <div class="h-8 col-span-2 bg-gray-200 rounded animate-pulse">
-            </div>
-            <div class=" h-8 bg-gray-200 rounded animate-pulse">
-            </div>
-            <div class="...">
-            </div>
-            <div class="col-span-2 ...">
+            <div className="w-24 bg-gray-300 h-6 rounded-md ">
             </div>
         </div>
     </div>
 </div>
+
 
   )
 }

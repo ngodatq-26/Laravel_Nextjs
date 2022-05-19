@@ -26,7 +26,8 @@ module.exports = {
       ".modules/profile/components/ProfileHeader.jsx",
       "./modules/common/components/Friends/MyFriendsList.jsx",
       "./modules/common/components/ProfileMini/ProfileMini.jsx",
-      "./modules/common/components/Skeleton.jsx"
+      "./modules/common/components/Skeleton.jsx",
+      "./modules/chat/components/Layout.jsx"
     ],
   },
   theme: {

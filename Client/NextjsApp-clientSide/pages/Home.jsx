@@ -18,7 +18,6 @@ const Home = (props) =>{
     const [loading,setLoading] = React.useState(false);
     const state = useSelector(state => state)
     const dispatch = useDispatch();
-    console.log(props)
     React.useEffect(() =>{
       dispatch(setUserAction(props.data))
     },[])
@@ -47,7 +46,7 @@ const Home = (props) =>{
             <MyFriendsList />
           </div>
         </div>
-        <div style={{width : "100%",bottom : 0}}>
+        <div style={{position : 'relative',marginTop : '150px'}}>
           <Footer />
         </div>
       </div>

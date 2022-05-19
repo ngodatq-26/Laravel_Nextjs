@@ -8,16 +8,18 @@ import { connectLaravel } from '../../../utils/connectPusher';
 import SendIcon from '@mui/icons-material/Send';
 import AllComment from './AllComment';
 import Echo from 'laravel-echo';
+import SnackbarCustom from '../../common/components/SnackbarCustom';
 
 
 const PostComponent = (props) =>{
 
-    console.log(props);
+    
     const [loading,setLoading] = React.useState(false);
-    const [dataComment,setDataComment] = React.useState(''); 
+    const [dataComment,setDataComment] = React.useState([]); 
     const [comment,setComment] = React.useState();
     const [showComment,setShowComment] = React.useState(false);
     const [loadingComment,setLoadingComment] = React.useState(false);
+    const [success,setSuccess] = React.useState(false);
 
     const ShowCommentHandle = () => {
         if(showComment == false) {
@@ -26,25 +28,26 @@ const PostComponent = (props) =>{
         setShowComment(!showComment);       
     };
 
+    React.useEffect(() => {
+        setTimeout(() => setSuccess(false),3000)
+    },[success]);
+
     const AllCommentHandle = React.useCallback(async () =>{
         setLoadingComment(true);
         const res = await fetchAPI(API_PATHS.getAllComment,'POST',{post_id : props.post_id},true);
         setLoadingComment(false);
-        console.log(res.data.comment)
         setDataComment(res.data.comment)
     },[])
 
-    console.log(dataComment)
     const CommentHandle =  async () => {
-        if(comment) {
             connectLaravel()        
             const channel = window.Echo.channel("my-channel");
             channel.listen(".my-event", function(res) {
                 setDataComment([...dataComment,res.cmt]);
-
             });
             const res = await fetchAPI(API_PATHS.createComment,'POST',{post_id : props.post_id, text : comment},true);
-        }
+            setComment('');
+            setSuccess(true);        
     }
 
     return (
@@ -109,7 +112,7 @@ const PostComponent = (props) =>{
             </div>
             <div className="flex w-full border-t border-gray-100">
                 <div className="mt-3 mx-5 flex flex-row text-xs">
-                    <div onClick = {ShowCommentHandle} className="flex text-gray-700 font-normal rounded-md mb-2 mr-4 items-center"><a style={{cursor :'pointer'}}>Comments:</a><div className="ml-1 text-gray-400 text-ms"> 30</div></div>
+                    <div onClick = {ShowCommentHandle} className="flex text-gray-700 font-normal rounded-md mb-2 mr-4 items-center"><a style={{cursor :'pointer'}}>Comments:</a><div className="ml-1 text-gray-400 text-ms"> {dataComment ? dataComment.length : null}</div></div>
                     <div className="flex text-gray-700 font-normal rounded-md mb-2 mr-4 items-center">Views:<div className="ml-1 text-gray-400 text-ms"> 60k</div></div>
                 </div>
                 <div className="mt-3 mx-5 w-full flex justify-end text-xs">
@@ -119,7 +122,10 @@ const PostComponent = (props) =>{
             {
                 showComment ? 
                 <AllComment dataComment = {dataComment} /> : null
-            }    
+            }  
+            {
+                loadingComment ? <Skeleton /> : null
+            }  
             <div className="relative flex items-center self-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400">
                 <img className="w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer" alt="User avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" />
                 <span className="absolute inset-y-0 right-0 flex items-center pr-6">
@@ -132,6 +138,9 @@ const PostComponent = (props) =>{
                      onChange = {(e) => setComment(e.target.value)}
                      className="w-full py-2 pl-4 pr-10 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400" style={{borderRadius: "25px"}} placeholder="Post a comment..." autoComplete="off"/>
             </div>
+            {
+                success ? <SnackbarCustom title="comment successfully" error="success" /> : null
+            }
       </div>}</>
     )
 }

@@ -9,6 +9,4 @@ export function connectLaravel(){
         cluster: process.env.cluster,
         forceTLS: process.env.forceTLS
     })
-
-    console.log("connection");
 }
