@@ -6,9 +6,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\AddFriend\AddFriendController;
+use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Home\CommentController;
 use App\Http\Controllers\Home\PostController;
 use App\Http\Controllers\Profile\ProfileController;
+use Google\Service\Adsense\Row;
 use Illuminate\Support\Facades\Storage;
 
 /*
@@ -42,6 +44,12 @@ Route::group(['prefix' => 'home','middleware' => ['auth:api']],function($router)
     Route::any('/get_posts_friends',[PostController::class,'GetPostsFriends']);
     Route::post('/create_comment',[CommentController::class,'CreateComment']);
     Route::any('/get_all_comment',[CommentController::class,'GetCommentByPost']);
+});
+
+Route::group(['prefix'=>'messages','middleware'=> ['auth:api']],function($router) {
+    Route::any('/create_room',[ChatController::class,'CreateRoom']);
+    Route::any('/add_member_room',[ChatController::class,'AddMemberRoom']);
+    Route::any('/send_message',[ChatController::class,'SendMessage']);
 });
 
 Route::group(['prefix' => 'profile','middleware' => ['auth:api']],function($router) {

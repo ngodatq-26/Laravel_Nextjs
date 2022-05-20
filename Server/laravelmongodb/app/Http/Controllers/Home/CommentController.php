@@ -24,7 +24,8 @@ class CommentController extends Controller {
             $comment->text = $request->text;
             $comment->post_id = $request->post_id;
             if($comment->save()){
-               $event = new CommentEvent($comment);
+               $comments = Comments::where('post_id',$request->post_id)->get();
+               $event = new CommentEvent($comments);
                event($event);
             }
             return response() ->json([
@@ -58,4 +59,6 @@ class CommentController extends Controller {
             ]);
         }
     }
+    
+    
 }

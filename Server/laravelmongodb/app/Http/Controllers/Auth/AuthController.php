@@ -44,6 +44,7 @@ class AuthController extends Controller
          $account->friends_pendding = [];
          $account->info = [];
          $account->friends_request = [];
+         $account->rooms = [];
          $check = Account::where('email',$request->email)->first();
          if($check){
              return response()->json(["message"=>"email has been existed","status"=>"200","success"=>"false"],201);
