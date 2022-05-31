@@ -47,9 +47,12 @@ Route::group(['prefix' => 'home','middleware' => ['auth:api']],function($router)
 });
 
 Route::group(['prefix'=>'messages','middleware'=> ['auth:api']],function($router) {
+    Route::any('/get_rooms',[ChatController::class,'GetAllRooms']);
     Route::any('/create_room',[ChatController::class,'CreateRoom']);
-    Route::any('/add_member_room',[ChatController::class,'AddMemberRoom']);
+    Route::any('/delete_room',[ChatController::class,'DeleteRoom']);
     Route::any('/send_message',[ChatController::class,'SendMessage']);
+    Route::any('/get_messages',[ChatController::class,'GetMessage']);
+    Route::any('/delete_message',[ChatController::class,'DeleteMessage']);
 });
 
 Route::group(['prefix' => 'profile','middleware' => ['auth:api']],function($router) {

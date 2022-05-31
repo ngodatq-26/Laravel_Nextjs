@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
+            $table->string('id_check');
             $table->string('name');
+            $table->string('members');
+            $table->boolean('isGroup');
             $table->timestamps();
         });
     }

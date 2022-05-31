@@ -1,8 +1,10 @@
 <?php 
 namespace App\Http\Controllers\AddFriend;
 
+use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\Rooms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use MongoDB\BSON\ObjectId;
@@ -60,6 +62,8 @@ class AddFriendController extends Controller {
         $account2  = Account::where("_id",$auth->_id)->pull('friends_request',$obj);
         $friend = Account::where("_id",$request->_id)->push('friends',$obj_main);
         $friend = Account::where("_id",$request->_id)->pull('friends_pendding',$obj_main);
+
+        
         return "success";
     }
 

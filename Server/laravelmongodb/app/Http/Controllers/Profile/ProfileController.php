@@ -13,6 +13,7 @@ class ProfileController extends Controller {
         if($account) {
             return response() -> json(["status"=>"200","success"=>"true","data"=>
               [
+                "user_id" => $auth->_id,
                 "email"=> $account[0]->email,
                 "name"=> $account[0]->name,
                 "info"=>$account[0]->info,

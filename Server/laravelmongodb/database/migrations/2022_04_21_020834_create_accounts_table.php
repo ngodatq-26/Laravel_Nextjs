@@ -26,7 +26,6 @@ return new class extends Migration
             $table->array('friends');//friends of mine
             $table->array('friends_request'); //friends request to me
             $table->array('friends_pendding');//request add new friend and pendding
-            $table->array('rooms');
         });
     }
 

@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class MessageEvent
+class MessageEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -38,6 +38,6 @@ class MessageEvent
 
     public function broadcastOn()
     {
-        return new Channel('messages-chanel');
+        return new channel('messages-chanel');
     }
 }
