@@ -1,23 +1,24 @@
+import { Button } from '@mui/material';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { setRoomNow } from '../redux/chatReducer';
 import FriendChat from './FriendChat'
 
-const AllFriendChat = () => {
-  const state = useSelector(state => state);
-  const dispatch = useDispatch();
-
-  console.log(state.commonReducer.user.friends);
-
+const AllFriendChat = (props) => {
+  
   return (
     <div>
-        {
-            state.commonReducer.user.friends.map((e,index) =>{
+        { props.rooms ? 
+            props.rooms.map((room,index) =>{
                 return (
-                    <div key = {index}>
-                    <FriendChat name = {e.name} />
+                    <div style={{cursor : 'pointer'}} key={index} onClick={(e)=>{
+                      e.preventDefault();
+                      props.setRoom(room)
+                    }}>
+                      <FriendChat name={room.name} e = {room} />
                     </div>
                 )
-            })
+            }) : null
         }
     </div>
   )

@@ -43,7 +43,7 @@ const PostComponent = (props) =>{
             connectLaravel()        
             const channel = window.Echo.channel("my-channel");
             channel.listen(".my-event", function(res) {
-                setDataComment([...dataComment,res.cmt]);
+                setDataComment(res.cmt);
             });
             const res = await fetchAPI(API_PATHS.createComment,'POST',{post_id : props.post_id, text : comment},true);
             setComment('');

@@ -27,7 +27,9 @@ module.exports = {
       "./modules/common/components/Friends/MyFriendsList.jsx",
       "./modules/common/components/ProfileMini/ProfileMini.jsx",
       "./modules/common/components/Skeleton.jsx",
-      "./modules/chat/components/Layout.jsx"
+      "./modules/chat/components/Layout.jsx",
+      "./modules/chat/components/MyMessage.jsx",
+      "./modules/chat/components/FriendMessage.jsx"
     ],
   },
   theme: {

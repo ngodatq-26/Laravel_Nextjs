@@ -16,4 +16,10 @@ export const API_PATHS = {
     acceptAdd : 'http://localhost:8000/api/friends/add',
     cancelAdd : 'http://localhost:8000/api/friends/cancel',
     deleteFriend : 'http://localhost:8000/api/friends/delete',
+    createRoom : 'http://localhost:8000/api/messages/create_room',
+    sendMessage :'http://localhost:8000/api/messages/send_message',
+    getAllRooms : 'http://127.0.0.1:8000/api/messages/get_rooms',
+    getMessages : 'http://127.0.0.1:8000/api/messages/get_messages',
+    deleteRooms : 'http://localhost:8000/api/messages/delete_room',
+    deleteMessage : 'http://localhost:8000/api/messages/delete_message',
 }

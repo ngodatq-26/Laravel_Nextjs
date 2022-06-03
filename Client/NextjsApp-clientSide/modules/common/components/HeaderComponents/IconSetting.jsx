@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import {style} from '../../../../utils/constant'
 
 const IconSetting = () => {
+  
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
