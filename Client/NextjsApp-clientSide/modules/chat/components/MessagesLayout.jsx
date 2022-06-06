@@ -31,10 +31,10 @@ const MessagesLayout = (props) => {
 
   React.useEffect(() =>{
     async function fetchData() {
-    setLoadingChange(true);
-    const res = await fetchAPI(API_PATHS.getMessages,'POST',{room_id : props.room._id,mount : 10},true)
-    setLoadingChange(false);
-    setList(res.data.messages)
+      setLoadingChange(true);
+      const res = await fetchAPI(API_PATHS.getMessages,'POST',{room_id : props.room._id,mount : 10},true)
+      setLoadingChange(false);
+      setList(res.data.messages);
     }
     fetchData()
   },[props.room])
@@ -79,12 +79,12 @@ const MessagesLayout = (props) => {
   },[]);
   
   return (
-    <div className="w-full px-5 flex flex-col justify-between ">
+    <div className="w-full px-5 flex flex-col justify-between " >
       {loadingChange ? <LinearProgress /> :<>
         <div  id="messages"
-              className="flex flex-col mt-5 overflow-y-scroll "
-              style={{height : '100%'}} 
-              onScroll={scrollGetMessages}>
+              className="flex flex-col mt-5 "
+              style={{height : '100%',overflowY : 'scroll'}} 
+              onScroll={scrollGetMessages} >
           {
             loading ? <div className="flex-col" style={{margin: '5px'}}>
             <LinearProgress />

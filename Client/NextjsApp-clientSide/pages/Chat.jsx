@@ -28,16 +28,16 @@ const Chat = (props) => {
     <div style={{display :'flex',flexDirection : 'column'}}>
         <HeaderCustom name={props.data.name} />
         <div className="flex flex-row justify-between bg-white" style={{position : 'absolute',bottom : '150px',top :'67px'}}>
-      <div className="flex flex-col w-2/5 border-r-2 overflow-y-scroll" >
-        <div className="border-b-2 py-4 px-2">
-          <input
-            type="text"
-            placeholder="search chatting"
-            className="py-2 px-2 border-2 border-gray-200 rounded-2xl w-full"
-          />
-        </div>
-        <AllFriendChat rooms={rooms} setRoom = {setRoom} />  
-      </div>
+          <div className="flex flex-col w-2/5 border-r-2 overflow-y-scroll" >
+            <div className="border-b-2 py-4 px-2">
+              <input
+                type="text"
+                placeholder="search chatting"
+                className="py-2 px-2 border-2 border-gray-200 rounded-2xl w-full"
+              />
+          </div>
+          <AllFriendChat rooms={rooms} setRoom = {setRoom} />  
+       </div>
       <MessagesLayout messages={msg} room ={room} />
       <Room setRooms ={setRooms} rooms={rooms} />
     </div>

@@ -74,7 +74,7 @@ const PostStatus = () => {
   }
   
   return (
-    <form className="bg-white shadow rounded-lg mb-6 p-4">
+    <form className="bg-white shadow rounded-lg mb-6 p-4" style={{marginTop : '70px'}}>
             <input  
             style={{height : '50px',marginBottom : '20px'}}
             value={dataPost.main}             

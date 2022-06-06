@@ -7,7 +7,7 @@ import FriendChat from './FriendChat'
 const AllFriendChat = (props) => {
   
   return (
-    <div>
+    <div style={{height : '100%',overflowY : 'scroll'}} >
         { props.rooms ? 
             props.rooms.map((room,index) =>{
                 return (

@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import { setUserAction } from '../modules/common/redux/commonReducer';
 import MyFriendsList from '../modules/common/components/Friends/MyFriendsList';
 import ProfileMini from '../modules/common/components/ProfileMini/ProfileMini';
+import FriendPendding from '../modules/common/components/FriendsListPending/FriendPendding';
 const Home = (props) =>{
   
     const [loading,setLoading] = React.useState(false);
@@ -42,10 +43,15 @@ const Home = (props) =>{
             }
           </div>
           <div style={{display : 'flex',flex :'0.3',flexDirection:'column',margin : '20px'}}>
-            <FriendList friendsRequest = {props.friendsRequest}/>
-            <MyFriendsList />
+          <div class="w-1/5 pt-16 h-full hidden xl:block px-4 fixed top-0 right-0">
+            <div class="h-full">
+                <FriendList friendsRequest = {props.friendsRequest}/>
+                <div class="border-b border-gray-200 dark:border-dark-third mt-6"></div>
+                <MyFriendsList />       
+            </div>
           </div>
-        </div>
+          </div>
+        </div> 
         <div style={{position : 'relative',marginTop : '150px'}}>
           <Footer />
         </div>

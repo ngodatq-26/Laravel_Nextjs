@@ -1,29 +1,110 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import friends_img from '../../../../images/friends.png'
+import page_img from '../../../../images/page.png'
+import memory_img from '../../../../images/memory.png'
+import group_img from '../../../../images/group.png'
+import Image from 'next/image'
 
 const ProfileMini = () => {
+  
+  const user = useSelector(state => state.commonReducer.user)
+
   return (
-    <div  >
-            <div className="flex flex-col gap-1 text-center items-center">
-                <img className="h-32 w-32 bg-white p-2 rounded-full shadow mb-4" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2000&amp;q=80" alt="" />
-                <p className="font-semibold">John Doe</p>
-                <div className="text-sm leading-normal text-gray-400 flex justify-center items-center">
-                <svg viewBox="0 0 24 24" className="mr-1" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                Los Angeles, California
-                </div>
+    <div class="w-1/5 pt-16 h-full hidden xl:flex flex-col fixed top-0 left-0">
+            <ul class="p-4">
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" alt="Profile picture" class="w-10 h-10 rounded-full" />
+                        <span class="font-semibold">{user.name}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third">
+                        <Image src={require=(friends_img)} width={40} height={40} alt="Profile picture" class="w-10 h-10 rounded-full" />
+                        <span class="font-semibold">Friends</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third">
+                         <Image src={require=(page_img)} width={40} height={40} alt="Profile picture" class="w-10 h-10 rounded-full" />
+                        <span class="font-semibold">Pages</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third">
+                          <Image src={require=(memory_img)} width={40} height={40} alt="Profile picture" class="w-10 h-10 rounded-full" />
+                        <span class="font-semibold">Memories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third">
+                          <Image src={require=(group_img)} width={40} height={40} alt="Profile picture" class="w-10 h-10 rounded-full" />
+                        <span class="font-semibold">Groups</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third">
+                        <span class="w-10 h-10 rounded-full grid place-items-center bg-gray-300 dark:bg-dark-second">
+                            <i class='bx bx-chevron-down'></i>
+                        </span>
+                        <span class="font-semibold">See more</span>
+                    </a>
+                </li>
+                <li class="border-b border-gray-200 dark:border-dark-third mt-6"></li>
+            </ul>
+            <div class="flex justify-between items-center px-4 h-4 group">
+                <span class="font-semibold text-gray-500 text-lg dark:text-dark-txt">Your shortcuts</span>
+                <span class="text-blue-500 cursor-pointer hover:bg-gray-200 dark:hover:bg-dark-third p-2 rounded-md hidden group-hover:inline-block">Edit</span>
             </div>
-            <div className="flex justify-center items-center gap-2 my-3">
-                <div className="font-semibold text-center mx-4">
-                    <p className="text-black">102</p>
-                    <span className="text-gray-400">Posts</span>
-                </div>
-                <div className="font-semibold text-center mx-4">
-                    <p className="text-black">102</p>
-                    <span className="text-gray-400">Followers</span>
-                </div>
-                <div className="font-semibold text-center mx-4">
-                    <p className="text-black">102</p>
-                    <span className="text-gray-400">Folowing</span>
-                </div>
+            <ul class="p-4">
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third">
+                        <img src="./images/group-img-1.jpg" alt="Profile picture" class="w-10 h-10 rounded-lg" />
+                        <span class="font-semibold">Cộng đồng Front-end(HTML/CSS/JS) Việt Nam</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third">
+                        <img src="./images/group-img-2.jpg" alt="Profile picture" class="w-10 h-10 rounded-lg" />
+                        <span class="font-semibold">CNPM08_UIT_Group học tập</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third">
+                        <img src="./images/group-img-3.jpg" alt="Profile picture" class="w-10 h-10 rounded-lg" />
+                        <span class="font-semibold">Cộng đồng UI/UX Design vietnam</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third">
+                        <img src="./images/group-img-4.jpg" alt="Profile picture" class="w-10 h-10 rounded-lg" />
+                        <span class="font-semibold">Nihon Koi</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third">
+                        <span class="w-10 h-10 rounded-full grid place-items-center bg-gray-300 dark:bg-dark-second">
+                            <i class='bx bx-chevron-down'></i>
+                        </span>
+                        <span class="font-semibold">See more</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="mt-auto p-6 text-sm text-gray-500 dark:text-dark-txt">
+                <a href="#">Privacy</a>
+                <span>.</span>
+                <a href="#">Terms</a>
+                <span>.</span>
+                <a href="#">Advertising</a>
+                <span>.</span>
+                <a href="#">Cookies</a>
+                <span>.</span>
+                <a href="#">Ad choices</a>
+                <span>.</span>
+                <a href="#">More</a>
+                <span>.</span>
+                <span>Facebook © 2021</span>
             </div>
         </div>
   )
