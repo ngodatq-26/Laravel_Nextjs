@@ -37,7 +37,7 @@ const SearchInput = (props) => {
       href={{
         pathname: '/Search',
         query: { name: search }
-      }}
+      }} prefetch
     >
       <Button variant='primary' >
         <SearchIcon />

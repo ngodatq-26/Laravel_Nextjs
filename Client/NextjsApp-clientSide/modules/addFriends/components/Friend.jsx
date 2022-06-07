@@ -9,6 +9,8 @@ import { useSelector } from 'react-redux';
 import CheckIcon from '@mui/icons-material/Check';
 import AddIcon from '@mui/icons-material/Add';
 import CancelIcon from '@mui/icons-material/Cancel';
+import dynamic from 'next/dynamic'
+const ButtonAdd = dynamic(() => import('./ButtonAdd'));
 
 const Friend = (props) =>{
 
@@ -96,29 +98,7 @@ const Friend = (props) =>{
                 <div className="text-gray-600 dark:text-gray-200 text-xs">
                     
                 </div>
-                {
-                    (check == 'friends') ?
-                        <Button onClick={ClickDeleteFriends} variant="primary"  >
-                            {}<Check color="success" />
-                        </Button>
-                     : 
-                         (check == 'friends_pendding') ? 
-                        <Button onClick = {ClickDelete} variant="primary"  style={{alignItems : 'center'}} >
-                         {}<PersonRemoveIcon color="primary"/>
-                        </Button> : 
-                         (check == 'friends_request') ?
-                        (<div style={{display : 'flex',flexDirection:'row'}}>
-                        <Button onClick={ClickAccept} variant="primary"  >
-                            {}<AddIcon color="success" />
-                        </Button> 
-                        <Button onClick={ClickCancel} variant="primary"  >
-                            {}<CancelIcon color="error"/>
-                        </Button></div>):
-                        <Button onClick={ClickAdd} variant="primary"  >
-                        {}<PersonAddIcon color="black"/>
-                        </Button>
-                     
-                }
+                <ButtonAdd check = {check} ClickAdd={ClickAdd} ClickDelete={ClickDelete} ClickAccept={ClickAccept} ClickCancel={ClickCancel} ClickDeleteFriends={ClickDeleteFriends}/>
             </div>
         </li>
     )

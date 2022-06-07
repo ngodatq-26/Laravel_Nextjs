@@ -1,13 +1,9 @@
 import React from 'react';
-import { API_PATHS } from '../../../../configs/apiConfigs';
-import { fetchAPI } from '../../../../utils/fetch';
 import IconHome from './IconHome';
 import IconMessage from './IconMessage';
 import IconNotifications from './IconNotifications';
 import SearchInput from './SearchInput';
-import ScaleHeader from '../ScaleHeader';
 import IconSetting from './IconSetting';
-import Personal from './Personal';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
 import ShowGroup from './ShowGroup';
@@ -17,7 +13,6 @@ export default function HeaderCustom(props) {
     const [show,setShow] = React.useState(false);
     const [dataFriend,setDataFriend] = React.useState();
     const user = useSelector((state) =>state.commonReducer.user);
-    
     return (<>
         <header className="w-full shadow-lg bg-white dark:bg-gray-700 items-center h-16 z-40" style={{position : 'fixed'}}>
             <Head>

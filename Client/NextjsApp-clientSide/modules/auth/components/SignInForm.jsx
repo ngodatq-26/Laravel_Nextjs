@@ -1,8 +1,6 @@
 import React from 'react';
 import { useFormik} from 'formik';
 import { SignInSchema } from '../utils';
-import { useSelector,useDispatch } from 'react-redux';
-import Image from 'next/image'
 import CustomButtonLoad from '../../common/components/CustomButtonLoad';
 
 const SignInForm = (props) =>{

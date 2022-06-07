@@ -15,6 +15,7 @@ import MyFriendsList from '../modules/common/components/Friends/MyFriendsList';
 import ProfileMini from '../modules/common/components/ProfileMini/ProfileMini';
 import FriendPendding from '../modules/common/components/FriendsListPending/FriendPendding';
 import ChatBox from '../modules/home/components/ChatBox';
+import { setChatRooms } from '../modules/chat/redux/chatReducer';
 const Home = (props) =>{
   
     const [loading,setLoading] = React.useState(false);
@@ -23,8 +24,10 @@ const Home = (props) =>{
     React.useEffect(() =>{
       dispatch(setShowRoom(""));
       dispatch(setUserAction(props.data))
+      dispatch(setChatRooms(props.rooms.rooms))
     },[])
 
+    console.log(props)
     return (
       <div style={{display :'flex',flexDirection : 'column'}}>       
         <HeaderCustom name={props.data.name} />
@@ -80,7 +83,13 @@ export async function getServerSideProps(context) {
     }
   })
   
-  
+  const resChatRoom = await fetch(API_PATHS.getAllRooms,{
+    headers : {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token.slice(6)
+    }
+  })
+
   const res_friends_request = await fetch(API_PATHS.getFriendsRequest,{
     headers : {
       'Content-Type': 'application/json',
@@ -98,9 +107,11 @@ export async function getServerSideProps(context) {
   const result = await res.json();
   const result2 = await res_friends_request.json();
   const result3 = await res_posts.json();
+  const result4 = await resChatRoom.json();
 
   return {
     props: {
+      rooms : result4,
       post : result3.all_posts_info,
       data : result.data,
       cookies : token.slice(6),

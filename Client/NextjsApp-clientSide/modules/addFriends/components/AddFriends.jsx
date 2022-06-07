@@ -1,8 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { API_PATHS } from '../../../configs/apiConfigs';
-import { fetchAPI } from '../../../utils/fetch';
-import SearchAll from '../../common/components/SearchAllButton'
 import Friend from './Friend';
 
 const AddFriends = (props) =>{
@@ -25,7 +21,6 @@ const AddFriends = (props) =>{
                         )
                     })   : null
                 }
-                <SearchAll />
             </ul>
         </div>
     )

@@ -1,7 +1,4 @@
 import React from 'react';
-import { Button } from '@mui/material';
-import CancelIcon from '@mui/icons-material/Cancel';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { API_PATHS } from '../../../../configs/apiConfigs';
 import { fetchAPI } from '../../../../utils/fetch';
 import { CircularProgress } from '@mui/material';
