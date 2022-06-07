@@ -10,21 +10,23 @@ import { API_PATHS } from '../configs/apiConfigs';
 import PostStatus from '../modules/home/components/PostStatus';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { setUserAction } from '../modules/common/redux/commonReducer';
+import { setShowRoom, setUserAction } from '../modules/common/redux/commonReducer';
 import MyFriendsList from '../modules/common/components/Friends/MyFriendsList';
 import ProfileMini from '../modules/common/components/ProfileMini/ProfileMini';
 import FriendPendding from '../modules/common/components/FriendsListPending/FriendPendding';
+import ChatBox from '../modules/home/components/ChatBox';
 const Home = (props) =>{
   
     const [loading,setLoading] = React.useState(false);
     const state = useSelector(state => state)
     const dispatch = useDispatch();
     React.useEffect(() =>{
+      dispatch(setShowRoom(""));
       dispatch(setUserAction(props.data))
     },[])
 
     return (
-      <div style={{display :'flex',flexDirection : 'column'}}>
+      <div style={{display :'flex',flexDirection : 'column'}}>       
         <HeaderCustom name={props.data.name} />
         <div style={{display :'flex',flexDirection:'row'}}>
           <div style={{display : 'flex',flex :'0.4'}}>
@@ -42,19 +44,21 @@ const Home = (props) =>{
               }) : null
             }
           </div>
-          <div style={{display : 'flex',flex :'0.3',flexDirection:'column',margin : '20px'}}>
-          <div class="w-1/5 pt-16 h-full hidden xl:block px-4 fixed top-0 right-0">
-            <div class="h-full">
+          <div style={{display : 'flex',flex :'0.3',flexDirection:'column',margin : '20px',marginBottom : '150px'}}>
+          <div className="w-1/5 pt-16 h-full hidden xl:block px-4 fixed top-0 right-0">
+            <div className="h-full">
                 <FriendList friendsRequest = {props.friendsRequest}/>
-                <div class="border-b border-gray-200 dark:border-dark-third mt-6"></div>
-                <MyFriendsList />       
-            </div>
+                <ChatBox />
+                <div className="border-b border-gray-200 dark:border-dark-third mt-6"></div>
+                <MyFriendsList />      
+            </div>       
           </div>
           </div>
         </div> 
         <div style={{position : 'relative',marginTop : '150px'}}>
           <Footer />
         </div>
+        
       </div>
     )
 }

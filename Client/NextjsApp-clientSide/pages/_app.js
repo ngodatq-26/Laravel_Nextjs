@@ -6,6 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { persistor } from '../redux/configureStore'
 import { Provider } from 'react-redux'
 import { store } from '../redux/configureStore'
+import "../modules/home/styles/styleChatBox.css"
 function MyApp({ Component, pageProps }) {
   return (
   <Provider store={store}>

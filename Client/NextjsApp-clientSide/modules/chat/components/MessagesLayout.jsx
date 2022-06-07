@@ -73,16 +73,17 @@ const MessagesLayout = (props) => {
     }
   }
 
-  React.useEffect(() =>{
-    const scroll = window.document.getElementById("messages");
-    scroll.scrollTop = scroll.scrollHeight;
-  },[]);
+  const messagesEndRef = React.useRef(null);
+  const scrollToBottom = () => {
+  messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+  React.useEffect(scrollToBottom, [list]);
   
   return (
     <div className="w-full px-5 flex flex-col justify-between " >
       {loadingChange ? <LinearProgress /> :<>
         <div  id="messages"
-              className="flex flex-col mt-5 "
+              className="flex flex-col mt-5"
               style={{height : '100%',overflowY : 'scroll'}} 
               onScroll={scrollGetMessages} >
           {
@@ -100,6 +101,7 @@ const MessagesLayout = (props) => {
               )
             }) : null
           }
+          <div ref={messagesEndRef} />
         </div>
         </>
               }<form onSubmit ={(e) => {

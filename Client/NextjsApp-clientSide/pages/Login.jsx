@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import Logo from '../images/logo.png'
 import { fetchAPI } from '../utils/fetch'
 import { API_PATHS } from '../configs/apiConfigs'
 import axios from 'axios'

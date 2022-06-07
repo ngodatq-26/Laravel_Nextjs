@@ -10,11 +10,14 @@ import IconSetting from './IconSetting';
 import Personal from './Personal';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
+import ShowGroup from './ShowGroup';
 
 export default function HeaderCustom(props) {
 
+    const [show,setShow] = React.useState(false);
     const [dataFriend,setDataFriend] = React.useState();
     const user = useSelector((state) =>state.commonReducer.user);
+    
     return (<>
         <header className="w-full shadow-lg bg-white dark:bg-gray-700 items-center h-16 z-40" style={{position : 'fixed'}}>
             <Head>
@@ -36,32 +39,35 @@ export default function HeaderCustom(props) {
                             </a>
                     </div>
                     <div className="container relative left-0 z-50 flex w-3/4 ">
-                    <ul class="hidden md:flex mx-4 items-center justify-center">
-            <li class="h-full hidden xl:flex">
-                <a href="#" class="inline-flex items-center justify-center p-1 rounded-full hover:bg-gray-200 dark:hover:bg-dark-third mx-1">
-                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" className="mx-auto object-cover rounded-full h-10 w-10" alt="Profile picture" class="rounded-full h-7 w-7" />
-                    <span class="mx-2 font-semibold dark:text-dark-txt">{user.name}</span>
+                    <ul className="hidden md:flex mx-4 items-center justify-center">
+            <li className="h-full hidden xl:flex">
+                <a href="#" className="inline-flex items-center justify-center p-1 rounded-full hover:bg-gray-200 dark:hover:bg-dark-third mx-1">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" className="mx-auto object-cover rounded-full h-10 w-10" alt="Profile picture" />
+                    <span className="mx-2 font-semibold dark:text-dark-txt">{user.name}</span>
                 </a>
             </li>
             <li>
-                <div class="text-xl hidden xl:grid place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative">
-                    <i class='bx bx-plus'></i>
+                <div className="text-xl hidden xl:grid place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative">
+                    <i className='bx bx-plus'></i>
                 </div>
             </li>
             <li>
-                <div class="text-xl hidden xl:grid place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative">
-                    <i class='bx bxl-messenger'></i>
+                <div onClick ={(e) =>{
+                    e.preventDefault();
+                    setShow(!show);
+                }} className="text-xl hidden xl:grid place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative">
+                    <i className='bx bxl-messenger'></i>
                 </div>
             </li>
             <li>
-                <div class="text-xl grid place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative">
-                    <i class='bx bxs-bell'></i>
-                    <span class="text-xs absolute top-0 right-0 bg-red-500 text-white font-semibold rounded-full px-1 text-center">9</span>
+                <div className="text-xl grid place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative">
+                    <i className='bx bxs-bell'></i>
+                    <span className="text-xs absolute top-0 right-0 bg-red-500 text-white font-semibold rounded-full px-1 text-center">9</span>
                 </div>
             </li>
             <li>
-                <div class="text-xl grid place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative" id="dark-mode-toggle">
-                    <i class='bx bxs-moon'></i>
+                <div className="text-xl grid place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative" id="dark-mode-toggle">
+                    <i className='bx bxs-moon'></i>
                 </div>
             </li>
         </ul>  
@@ -69,6 +75,7 @@ export default function HeaderCustom(props) {
                     <div></div>
                 </div>
             </div>
+            <ShowGroup show={show} setShow ={setShow} />
         </header> 
         </>
     )
