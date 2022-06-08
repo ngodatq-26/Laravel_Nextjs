@@ -16,7 +16,6 @@ const Friend = (props) =>{
 
     const [addFriend,setAddFriend] = React.useState(false);
     const [check,setCheck] = React.useState('');
-
     const user = useSelector((state) => state.commonReducer.user)
     React.useEffect(()=>{
         for(let i = 0;i < user.friends.length;i++) {
@@ -81,6 +80,7 @@ const Friend = (props) =>{
 
     return (
         <li className="flex flex-row " style={{margin :'30px'}}>
+            
             <div className="select-none cursor-pointer flex flex-1 items-center p-4">
                 <div className="flex flex-col w-10 h-10 justify-center items-center mr-4">
                     <a href="#" className="block relative">
@@ -95,8 +95,7 @@ const Friend = (props) =>{
                         {props.email}
                     </div>
                 </div>
-                <div className="text-gray-600 dark:text-gray-200 text-xs">
-                    
+                <div className="text-gray-600 dark:text-gray-200 text-xs">              
                 </div>
                 <ButtonAdd check = {check} ClickAdd={ClickAdd} ClickDelete={ClickDelete} ClickAccept={ClickAccept} ClickCancel={ClickCancel} ClickDeleteFriends={ClickDeleteFriends}/>
             </div>

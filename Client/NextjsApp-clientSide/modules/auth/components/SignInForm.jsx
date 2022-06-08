@@ -2,6 +2,7 @@ import React from 'react';
 import { useFormik} from 'formik';
 import { SignInSchema } from '../utils';
 import CustomButtonLoad from '../../common/components/CustomButtonLoad';
+import Link from 'next/link';
 
 const SignInForm = (props) =>{
 
@@ -69,9 +70,9 @@ const SignInForm = (props) =>{
                                     }
                             </div>
                             <div className="text-center">
-                                    <a href="/Register" className="right-0 inline-block text-sm font-light align-baseline text-500 hover:text-gray-800">
+                                    <Link href="/Register" className="right-0 inline-block text-sm font-light align-baseline text-500 hover:text-gray-800">
                                             Create an account
-                                    </a>
+                                    </Link>
                             </div>
                         </form>
          

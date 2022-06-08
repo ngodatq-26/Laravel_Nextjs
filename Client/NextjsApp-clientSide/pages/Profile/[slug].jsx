@@ -17,7 +17,7 @@ export async function getStaticPaths(){
     paths: [
         { params: { slug: 'main' } },
     ],
-    fallback: true,
+    fallback: false,
      // will be passed to the page component as props
   }
 } 
