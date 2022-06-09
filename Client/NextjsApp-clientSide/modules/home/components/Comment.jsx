@@ -2,18 +2,23 @@ import React from 'react';
 import { connectLaravel } from '../../../utils/connectPusher';
 const Comment = (props) => {
 
-  return (
-    <div className="text-black p-4 antialiased flex">
-        <img className="rounded-full h-8 w-8 mr-2 mt-1 " src="https://picsum.photos/id/1027/200/200"/>
-        <div>
-            <div className="bg-gray-100 rounded-lg px-4 pt-2 pb-2.5">
-                <div className="font-semibold text-sm leading-relaxed">{props.name}</div>
-                <div className="text-xs leading-snug md:leading-normal">{props.text}</div>
-            </div>
-            <div className="text-xs  mt-0.5 text-gray-500">14 w</div>
-            
-        </div>
-    </div>
+  return ( 
+    <div class="flex space-x-2">
+              <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" alt="Profile picture" class="w-9 h-9 rounded-full" />
+              <div>
+                  <div class="bg-gray-100 dark:bg-dark-third p-2 rounded-2xl text-sm">
+                      <span class="font-semibold block">{props.name}</span>
+                      <span>{props.text}</span>
+                  </div>
+                  <div class="p-2 text-xs text-gray-500 dark:text-dark-txt">
+                      <span class="font-semibold cursor-pointer">Like</span>
+                      <span>.</span>
+                      <span class="font-semibold cursor-pointer">Reply</span>
+                      <span>.</span>
+                      10m
+                  </div>
+              </div>
+          </div>
   )
 }
 
