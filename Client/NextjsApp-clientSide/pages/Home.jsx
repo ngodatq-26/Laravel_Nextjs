@@ -76,6 +76,7 @@ export async function getServerSideProps(context) {
       },
     }
   }
+  
   const res = await fetch(API_PATHS.getProfile,{
     headers : {
       'Content-Type': 'application/json',

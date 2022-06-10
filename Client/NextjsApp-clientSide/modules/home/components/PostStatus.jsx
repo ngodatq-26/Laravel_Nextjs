@@ -64,7 +64,7 @@ const PostStatus = () => {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 "Access-Control-Allow-Origin": "*",
-                Authorization : authchek || ''
+                Authorization : authchek || '',
             },
         }).then(e => {
             setImages([...images,e.data.images])

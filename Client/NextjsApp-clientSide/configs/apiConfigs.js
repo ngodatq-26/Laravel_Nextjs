@@ -22,4 +22,6 @@ export const API_PATHS = {
     getMessages : 'http://127.0.0.1:8000/api/messages/get_messages',
     deleteRooms : 'http://localhost:8000/api/messages/delete_room',
     deleteMessage : 'http://localhost:8000/api/messages/delete_message',
+    getAllLike : 'http://localhost:8000/api/home/get_count_react',
+    likeThisPost : 'http://localhost:8000/api/home/react_post',
 }
