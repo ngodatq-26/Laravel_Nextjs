@@ -24,8 +24,7 @@ class CommentController extends Controller {
             $comment->text = $request->text;
             $comment->post_id = $request->post_id;
             if($comment->save()){
-               $comments = Comments::where('post_id',$request->post_id)->get();
-               $event = new CommentEvent($comments);
+               $event = new CommentEvent($comment);
                event($event);
             }
             return response() ->json([

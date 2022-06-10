@@ -17,7 +17,6 @@ class PostController extends Controller {
         $post->name = $auth->name;
         $post->post_main = $request->main;
         $post->share = $request->share;
-        $post->react = $request->react;
         $post->title = $request->title;
         $post->images = $request->images;
         $post->save();
@@ -117,4 +116,5 @@ class PostController extends Controller {
 
         }
     }
+
 }

@@ -12,7 +12,6 @@ class AllPosts extends Model
     protected $fillable = [
         'post_title',
         'status',
-        'react',
         'comment',
     ];
 

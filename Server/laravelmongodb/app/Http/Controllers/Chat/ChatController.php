@@ -39,11 +39,15 @@ class ChatController extends Controller {
                 $room->members = $array;
             }
 
+            if($request->name) {
+                $room->name = $request->name;
+            }
             //kiem tra room co ton tai hay khong
             $check =  Rooms::where('id_check',$room->id_check)->take(1)->get();
             if(count($check) == 0) {
                 $room->save();
                 return response()->json([
+                    "status" => 200,
                     "success" => true,
                     "message" => "room create successfully",
                     "info"=> $room
@@ -53,7 +57,8 @@ class ChatController extends Controller {
                 return response()->json([
                     "success" => false,
                     "message" => "rooms exist with friends",
-                    "check" => $check
+                    "check" => $check,
+                    "status" => 401,
                 ]);
             }    
         }
@@ -103,7 +108,7 @@ class ChatController extends Controller {
             $message->room_id = $request->room_id;
             if($message->save())
             {
-                $messages = Messages::where('room_id',$request->room_id)->get();
+                $messages = Messages::where('room_id',$request->room_id)->orderBy('created_at','desc')->get();
                 $event = new MessageEvent($messages);
                 event($event);           
             }
@@ -153,7 +158,7 @@ class ChatController extends Controller {
             return response() ->json([
                 "success" =>true,
                 "message" => "get message successfully",
-                "message_create" => $messages
+                "messages" => $messages
             ]); 
         } catch (Exception $e) {
             return response() ->json([
