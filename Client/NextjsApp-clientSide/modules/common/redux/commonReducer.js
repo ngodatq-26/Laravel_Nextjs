@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const commonState = {
     show_room : '',
-    user :''
+    user :'',
+    notice : '',
 }
 
 const commonSlice = createSlice({
@@ -14,10 +15,13 @@ const commonSlice = createSlice({
         },
         setShowRoom : (state,action) =>{
             state.show_room = action.payload
+        },
+        setNotice : (state,action) => {
+            state.notice = action.payload
         }
     }
 })
 
 const {reducer,actions} = commonSlice
-export const {setUserAction,setShowRoom} = actions
+export const {setUserAction,setShowRoom,setNotice} = actions
 export default reducer

@@ -7,12 +7,34 @@ import IconSetting from './IconSetting';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
 import ShowGroup from './ShowGroup';
+import { fetchAPI } from '../../../../utils/fetch';
+import { API_PATHS } from '../../../../configs/apiConfigs';
+import Echo from 'laravel-echo';
+import { connectLaravel } from '../../../../utils/connectPusher';
+import { useDispatch } from 'react-redux';
 
 export default function HeaderCustom(props) {
 
     const [show,setShow] = React.useState(false);
     const [dataFriend,setDataFriend] = React.useState();
     const user = useSelector((state) =>state.commonReducer.user);
+    const notices = useSelector((state) =>state.commonReducer.notice);
+    const [notice,setNotice] = React.useState(notices);
+    const dispatch = useDispatch();
+
+    console.log(notice.length)
+
+    React.useEffect(() => {
+        connectLaravel();
+    },[])
+
+    React.useEffect(() => {
+        var channel = window.Echo.channel("notice-channel");
+        channel.listen(".notice-event", function(res) {
+            setNotice([...notice, res.message]);
+        });
+    },[]) 
+
     return (<>
         <header className="w-full shadow-lg bg-white dark:bg-gray-700 items-center h-16 z-40" style={{position : 'fixed'}}>
             <Head>
@@ -57,7 +79,10 @@ export default function HeaderCustom(props) {
             <li>
                 <div className="text-xl grid place-items-center bg-gray-200 dark:bg-dark-third dark:text-dark-txt rounded-full mx-1 p-3 cursor-pointer hover:bg-gray-300 relative">
                     <i className='bx bxs-bell'></i>
-                    <span className="text-xs absolute top-0 right-0 bg-red-500 text-white font-semibold rounded-full px-1 text-center">9</span>
+                    {
+                        (notice.length != 0) ? <span className="text-xs absolute top-0 right-0 bg-red-500 text-white font-semibold rounded-full px-1 text-center">{notice.length}</span>
+                        : null
+                    }
                 </div>
             </li>
             <li>

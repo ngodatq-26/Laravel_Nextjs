@@ -9,6 +9,7 @@ import SendIcon from '@mui/icons-material/Send';
 import AllComment from './AllComment';
 import Echo from 'laravel-echo';
 import SnackbarCustom from '../../common/components/SnackbarCustom';
+import TableShare from './TableShare';
 
 
 const PostComponent = (props) =>{
@@ -22,6 +23,7 @@ const PostComponent = (props) =>{
     const [like,setLike] = React.useState();
     const [countLike,setCountLike] = React.useState();
     const [button,setButton] = React.useState(false);
+    const [mount,setMount] = React.useState(10);
 
     React.useEffect(() => {
         async function getAllLike() {
@@ -46,7 +48,7 @@ const PostComponent = (props) =>{
             post_id : props.post_id
         })
         setLike(!like);
-        setButton(!button)
+        setButton(!button);
     },[like])
 
     React.useEffect(() => {
@@ -55,16 +57,15 @@ const PostComponent = (props) =>{
 
     const AllCommentHandle = React.useCallback(async () =>{  
         setLoadingComment(true);
-        const res = await fetchAPI(API_PATHS.getAllComment,'POST',{post_id : props.post_id},true);
+        const res = await fetchAPI(API_PATHS.getAllComment,'POST',{post_id : props.post_id,mount : mount},true);
         setLoadingComment(false);
         setDataComment(res.data.comment);
-    },[CommentHandle])
+    },[CommentHandle]);
 
     console.log(dataComment)
 
-    const CommentHandle =  React.useCallback(async () => {
-        connectLaravel();   
-        console.log('test')
+    React.useEffect(() =>{
+        connectLaravel();
         const channel = window.Echo.channel("my-channel").subscribed(() =>{
             console.log("subscribed")
         });
@@ -72,6 +73,10 @@ const PostComponent = (props) =>{
             setDataComment(old => [...old,res.cmt])
             console.log('check event')
         });
+    },[])
+
+    const CommentHandle =  React.useCallback(async () => {     
+        console.log('test')
         const res = await fetchAPI(API_PATHS.createComment,'POST',{post_id : props.post_id, text : comment},true);
         setComment('');
         setSuccess(true);       
@@ -116,9 +121,7 @@ const PostComponent = (props) =>{
                     }
       </div>
       </div>
-
-
-
+      
       <div className= "px-4 py-2">
           <div className= "flex items-center justify-between">
               <div className= "flex flex-row-reverse items-center">
@@ -154,7 +157,7 @@ const PostComponent = (props) =>{
                   </div>
                   <div className= "w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl py-2 rounded-lg cursor-pointer text-gray-500 dark:text-dark-txt">
                       <i className= 'bx bx-share bx-flip-horizontal'></i>
-                      <span className= "text-sm font-semibold">Share</span>
+                      <TableShare />
                   </div>
               </div>
           </div>

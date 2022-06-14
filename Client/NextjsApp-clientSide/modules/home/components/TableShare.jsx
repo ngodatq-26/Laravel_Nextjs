@@ -10,7 +10,7 @@ import { fetchAPI } from '../../../utils/fetch';
 import { API_PATHS } from '../../../configs/apiConfigs';
 import SnackbarCustom from '../../common/components/SnackbarCustom';
 
-const Room = (props) => {
+const TableShare = (props) => {
 
   const user = useSelector(state => state.commonReducer.user)
   const [open, setOpen] = React.useState(false);
@@ -19,8 +19,8 @@ const Room = (props) => {
   const [name,setName] = React.useState('');
   const [res,setRes] = React.useState('');
   const [status,setStatus] = React.useState('');
-
   const friends = user.friends;
+
   const createHandle = async () =>{
     var list = [user.user_id];
     var a = document.getElementsByClassName('form-check-input');
@@ -63,14 +63,14 @@ const Room = (props) => {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             <input
                 type="text"
-                placeholder="your name room"
+                placeholder="text share"
                 className="py-2 px-2 border-2 border-gray-200 rounded-2xl w-full"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
             />
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {
+            { friends ?
               friends.map((e,index) =>{
                 return (
                   <div className="py-5 px-3" key={index}>
@@ -88,7 +88,7 @@ const Room = (props) => {
                     </div>
                   </div>
                 )
-              })
+              }) : null
             }
           </Typography>
           <div style={{marginLeft : '200px'}}>
@@ -105,20 +105,12 @@ const Room = (props) => {
           <SnackbarCustom title={res} alert='error' />
         }</> : null
         }
-          <div className="font-semibold text-xl py-4">Mern Stack Group</div>
-          <img
-            src="https://source.unsplash.com/L2cxSuKWbpo/600x600"
-            className="object-cover rounded-xl"
-            alt=""
-          />
-          <div className="font-semibold py-4">Created 22 Sep 2021</div>
-          <div className="font-light" style={{alignItems : 'center'}}>
-            create your room and chat with friends now,you can create many rooms
-            <Button onClick={handleOpen} variant="outlined" style={{marginLeft : '80px'}}>Create Chat</Button>
+          <div>
+            <span onClick={handleOpen} className= "text-sm font-semibold">Share</span>
           </div>
-          </div>
+        </div>
     </div>
   )
 }
 
-export default Room
+export default TableShare

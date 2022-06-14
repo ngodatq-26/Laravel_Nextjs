@@ -27,6 +27,7 @@ function MyApp({ Component, pageProps }) {
     router.events.on("routeChangeError", handleComplete);
   }, [router]);
 
+  console.log(pageProps)
   return (
   <Provider store={store}>
   <PersistGate loading={null} persistor={persistor}>

@@ -17,7 +17,7 @@ export const fetchAPI = async (url,method,data,auth = true) =>{
         })
     }
     if(method === "GET") {
-        return await axios.post(url,data,{headers :headers}).then((data) =>{
+        return await axios.get(url,data,{headers :headers}).then((data) =>{
             return data;
         })
     }

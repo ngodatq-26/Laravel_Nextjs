@@ -10,21 +10,23 @@ import { API_PATHS } from '../configs/apiConfigs';
 import PostStatus from '../modules/home/components/PostStatus';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { setShowRoom, setUserAction } from '../modules/common/redux/commonReducer';
+import { setNotice, setShowRoom, setUserAction } from '../modules/common/redux/commonReducer';
 import MyFriendsList from '../modules/common/components/Friends/MyFriendsList';
 import ProfileMini from '../modules/common/components/ProfileMini/ProfileMini';
 import FriendPendding from '../modules/common/components/FriendsListPending/FriendPendding';
 import ChatBox from '../modules/home/components/ChatBox';
 import { setChatRooms } from '../modules/chat/redux/chatReducer';
 const Home = (props) =>{
-  
+
     const [loading,setLoading] = React.useState(false);
     const state = useSelector(state => state)
     const dispatch = useDispatch();
+
     React.useEffect(() =>{
       dispatch(setShowRoom(""));
       dispatch(setUserAction(props.data))
       dispatch(setChatRooms(props.rooms.rooms))
+      dispatch(setNotice(props.notice))
     },[])
 
     console.log(props)
@@ -76,6 +78,13 @@ export async function getServerSideProps(context) {
       },
     }
   }
+
+  const resNotice = await fetch(API_PATHS.getNotices,{
+    headers : {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token.slice(6)
+    }
+  })
   
   const res = await fetch(API_PATHS.getProfile,{
     headers : {
@@ -109,6 +118,7 @@ export async function getServerSideProps(context) {
   const result2 = await res_friends_request.json();
   const result3 = await res_posts.json();
   const result4 = await resChatRoom.json();
+  const result5 = await resNotice.json();
 
   return {
     props: {
@@ -117,6 +127,7 @@ export async function getServerSideProps(context) {
       data : result.data,
       cookies : token.slice(6),
       friendsRequest : result2.data,
+      notice : result5.notices
     }, // will be passed to the page component as props
   }
 }
