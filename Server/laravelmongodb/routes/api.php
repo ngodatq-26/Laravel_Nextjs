@@ -8,8 +8,10 @@ use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\AddFriend\AddFriendController;
 use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Home\CommentController;
+use App\Http\Controllers\Home\NotificationController;
 use App\Http\Controllers\Home\PostController;
 use App\Http\Controllers\Home\ReactController;
+use App\Http\Controllers\Home\ShareController;
 use App\Http\Controllers\Profile\ProfileController;
 use Google\Service\Adsense\Row;
 use Illuminate\Support\Facades\Storage;
@@ -47,6 +49,8 @@ Route::group(['prefix' => 'home','middleware' => ['auth:api']],function($router)
     Route::any('/get_all_comment',[CommentController::class,'GetCommentByPost']);
     Route::post('/react_post',[ReactController::class,'ReactPost']);
     Route::post('/get_count_react',[ReactController::class,'getAllReacts']);
+    Route::post('/create_share',[ShareController::class,'CreateShare']);
+    Route::get('/get_notifications',[NotificationController::class,'GetNotifications']);
 });
 
 Route::group(['prefix'=>'messages','middleware'=> ['auth:api']],function($router) {
