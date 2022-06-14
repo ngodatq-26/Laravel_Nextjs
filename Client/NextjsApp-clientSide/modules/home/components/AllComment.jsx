@@ -4,7 +4,7 @@ import Comment from './Comment'
 import { useDispatch } from 'react-redux'
 
 const AllComment = (props) => {
-
+  
   return (<>
     { props.dataComment ? props.dataComment.map((e,index) =>{
         return (

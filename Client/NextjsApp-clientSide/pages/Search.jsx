@@ -7,7 +7,6 @@ import { API_PATHS } from '../configs/apiConfigs';
 
 const Search = (props) =>{
 
- console.log(props)
  return (
           <div style={{display :'flex',flexDirection : 'column'}}>
             <HeaderCustom  />

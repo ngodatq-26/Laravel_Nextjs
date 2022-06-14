@@ -23,7 +23,7 @@ const PostComponent = (props) =>{
     const [like,setLike] = React.useState();
     const [countLike,setCountLike] = React.useState();
     const [button,setButton] = React.useState(false);
-    const [mount,setMount] = React.useState(10);
+    const [mount,setMount] = React.useState(5);
 
     React.useEffect(() => {
         async function getAllLike() {
@@ -59,14 +59,13 @@ const PostComponent = (props) =>{
         setLoadingComment(true);
         const res = await fetchAPI(API_PATHS.getAllComment,'POST',{post_id : props.post_id,mount : mount},true);
         setLoadingComment(false);
-        setDataComment(res.data.comment);
+        const list = res.data.comment.slice(0).reverse();
+        setDataComment(list);
     },[CommentHandle]);
-
-    console.log(dataComment)
 
     React.useEffect(() =>{
         connectLaravel();
-        const channel = window.Echo.channel("my-channel").subscribed(() =>{
+        const channel = window.Echo.channel("my-channel." + props.post_id).subscribed(() =>{
             console.log("subscribed")
         });
         channel.listen(".my-event", function(res) {
@@ -76,7 +75,6 @@ const PostComponent = (props) =>{
     },[])
 
     const CommentHandle =  React.useCallback(async () => {     
-        console.log('test')
         const res = await fetchAPI(API_PATHS.createComment,'POST',{post_id : props.post_id, text : comment},true);
         setComment('');
         setSuccess(true);       

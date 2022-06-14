@@ -9,7 +9,6 @@ import { setShowRoom } from '../../redux/commonReducer';
 const ShowGroup = (props) => {
 
   const state = useSelector(state =>state)
-  console.log(state)
   const dispatch = useDispatch();
   const chatRooms = state.chatReducer.chatRooms;
   const showRoomHandle = (e) =>{

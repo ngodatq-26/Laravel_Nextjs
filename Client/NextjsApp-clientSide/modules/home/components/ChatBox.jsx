@@ -12,7 +12,6 @@ import { connectLaravel } from '../../../utils/connectPusher';
 const ChatBox = () => {
 
     const show_room = useSelector(state => state.commonReducer.show_room)
-    console.log(show_room)
     const dispatch = useDispatch();
     const chatModal = document.querySelector('.chat-modal');
     const [showModal,setShowModal] = React.useState(false);

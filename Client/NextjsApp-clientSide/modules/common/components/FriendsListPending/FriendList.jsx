@@ -3,7 +3,6 @@ import FriendPendding from './FriendPendding';
 
 const FriendList = (props) => {
 
-  console.log(props)
   return (<>
     <div className="flex justify-between items-center px-4 pt-4">
         <span className="font-semibold text-gray-500 text-lg dark:text-dark-txt">Firend requests</span>

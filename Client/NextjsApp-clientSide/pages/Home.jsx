@@ -29,10 +29,9 @@ const Home = (props) =>{
       dispatch(setNotice(props.notice))
     },[])
 
-    console.log(props)
     return (
       <div style={{display :'flex',flexDirection : 'column'}}>       
-        <HeaderCustom name={props.data.name} />
+        <HeaderCustom name={props.data.name} notice={props.notice}/>
         <div style={{display :'flex',flexDirection:'row'}}>
           <div style={{display : 'flex',flex :'0.4'}}>
             <ProfileMini />
