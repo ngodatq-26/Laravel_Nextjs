@@ -34,4 +34,17 @@ class NotificationController extends Controller {
             ],401);
         }
     }
+
+    public function SeenNotifications(Request $request) {
+        try {
+            $auth = auth('api')->user();
+        } 
+        catch (Exception $e) {
+            return response()->json([
+                "success" => false,
+                "message" => $e
+            ],401);
+        }
+    }
+
 }

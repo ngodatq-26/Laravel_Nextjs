@@ -2,11 +2,13 @@
   namespace App\Http\Controllers\Home;
 
 use App\Events\CommentEvent;
+use App\Events\NoticeEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use Illuminate\Http\Request;
 use App\Models\AllPosts;
 use App\Models\Comments;
+use App\Models\Notifications;
 use App\Models\React;
 use App\Models\Share;
 use Exception;
@@ -20,6 +22,7 @@ class ShareController extends Controller {
     use HasFactory;
 
     public function CreateShare(Request $request) {
+        
         try {
             $auth = auth('api')->user();
             $share = new Share;
@@ -28,6 +31,17 @@ class ShareController extends Controller {
             $share->send_to = $request->send_to;
             $share->post_id = $request->post_id;
             $share->save();
+            for($i = 0;$i < count($request->send_to);$i ++) {
+                $notice = new Notifications;
+                $notice->user_id = $request->send_to[$i];
+                $notice->text = $auth->name." đã chia sẻ tới bạn 1 bài viết";
+                $notice->seen = false;
+                $notice->post_id = $request->post_id;
+                if($notice->save()) {
+                    $event = new NoticeEvent($notice);
+                    event($event);
+                }
+            }
             return response()->json([
                 "success" => true,
                 "message" =>"create share successfully",
