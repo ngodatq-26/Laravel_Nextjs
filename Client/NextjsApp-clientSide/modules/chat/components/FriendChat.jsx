@@ -11,7 +11,7 @@ const FriendChat = (props) => {
   const [nameRoom,setNameRoom] = React.useState('');
   
   return (
-    <div className="flex flex-row py-4 px-2 items-center border-b-2">
+  <div className="flex flex-row py-4 px-2 items-center border-b-2">
     <div className="w-1/4">
       <img
         src="https://source.unsplash.com/otT2199XwI8/600x600"

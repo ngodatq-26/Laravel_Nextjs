@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 
 const ShowNotice = (props) => {
   
-  const notices = useSelector(state => state.commonReducer.notice);
-  console.log(notices)
+  const notice = useSelector(state => state.commonReducer.notice);
+  const notices = notice.slice(0).reverse();
   return (<>
    {props.show ?
     <div className= "bg-white mt-40 px-4 py-3 rounded-lg shadow-md max-w-xs" style={{width : '30%',right:'5%',position : 'absolute',marginTop : '5px'}}>
@@ -27,10 +27,10 @@ const ShowNotice = (props) => {
                             <div className= "ml-3">
                                 <span className= "font-medium text-sm"></span>
                                 <p className= "text-sm">{e.text}</p>
-                                <span className= "text-sm text-blue font-semibold">a few seconds ago</span>
+                                <span className= "text-sm text-blue font-semibold" style={{color: "#1876f2"}}>a few seconds ago</span>
                             </div>
                             <div>
-                                <svg viewBox="0 0 8 8" fill="currentColor" className= "h-4 w-4 text-blue"><circle cx="4" cy="4" r="3"></circle></svg>
+                                <svg viewBox="0 0 8 8" fill="currentColor" className = "h-4 w-4 text-blue" style={{color: "#1876f2"}}><circle cx="4" cy="4" r="3"></circle></svg>
                             </div>
                         </div>
                     )

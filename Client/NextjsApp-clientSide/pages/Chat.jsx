@@ -22,11 +22,11 @@ const Chat = (props) => {
   const [room,setRoom] = React.useState(props.chatroom.rooms[0]);
   const [msg,setMsg] = React.useState(props.messages.messages);
   const [rooms,setRooms] = React.useState(props.chatroom.rooms);
- 
+  
 
   return (
     <div style={{display :'flex',flexDirection : 'column'}}>
-        <HeaderCustom name={props.data.name} />
+        <HeaderCustom name={props.data.name} notice={props.notice} />
         <div className="flex flex-row justify-between bg-white" style={{position : 'absolute',bottom : '150px',top :'67px'}}>
           <div className="flex flex-col w-2/5 border-r-2 overflow-y-scroll" >
             <div className="border-b-2 py-4 px-2">
@@ -81,9 +81,18 @@ export async function getServerSideProps(context) {
       body : JSON.stringify({room_id : chatroom.rooms[0]._id,mount : 10})
     })
 
+    const resNotice = await fetch(API_PATHS.getNotices,{
+      headers : {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token.slice(6)
+      }
+    })
+
+    const result5 = await resNotice.json();
     const messages = await resMessage.json();
     return {
         props: {
+          notice : result5.notices,
           data : result.data,
           cookies : token.slice(6),
           chatroom : chatroom,

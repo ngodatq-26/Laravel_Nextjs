@@ -25,5 +25,5 @@ export const API_PATHS = {
     getAllLike : 'http://localhost:8000/api/home/get_count_react',
     likeThisPost : 'http://localhost:8000/api/home/react_post',
     getNotices : 'http://127.0.0.1:8000/api/home/get_notifications',
-
+    shareThisPost : 'http://localhost:8000/api/home/create_share',
 }

@@ -9,7 +9,7 @@ const Search = (props) =>{
 
  return (
           <div style={{display :'flex',flexDirection : 'column'}}>
-            <HeaderCustom  />
+            <HeaderCustom notice={props.notice} />
             <div style={{display :'flex',flexDirection:'row'}}>
               <div style={{display : 'flex',flex :'0.5'}}></div>
               <div className="bg-white mt-3" style={{display : 'flex',flex :'1',flexDirection:'column'}}>
@@ -36,6 +36,15 @@ export async function getServerSideProps(context) {
     }
   }
 
+  const resNotice = await fetch(API_PATHS.getNotices,{
+    headers : {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token.slice(6)
+    }
+  })
+
+  const result5 = await resNotice.json();
+
   const resfriend = await fetch(API_PATHS.search,{
     headers : {
       'Content-Type': 'application/json',
@@ -48,7 +57,8 @@ export async function getServerSideProps(context) {
   return {
     props: {
       cookies : token.slice(6),
-      friends : result_friends.data
+      friends : result_friends.data,
+      notice : result5.notices
     }, // will be passed to the page component as props
   }
 }

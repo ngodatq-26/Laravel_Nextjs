@@ -10,7 +10,8 @@ import AllComment from './AllComment';
 import Echo from 'laravel-echo';
 import SnackbarCustom from '../../common/components/SnackbarCustom';
 import TableShare from './TableShare';
-
+import { Modal } from 'antd';
+import { convertTime } from '../../../utils/constant';
 
 const PostComponent = (props) =>{
 
@@ -24,6 +25,8 @@ const PostComponent = (props) =>{
     const [countLike,setCountLike] = React.useState();
     const [button,setButton] = React.useState(false);
     const [mount,setMount] = React.useState(5);
+
+    const time = React.useMemo(() => convertTime(props.updated_at));
 
     React.useEffect(() => {
         async function getAllLike() {
@@ -72,13 +75,13 @@ const PostComponent = (props) =>{
             setDataComment(old => [...old,res.cmt])
             console.log('check event')
         });
-    },[])
+    },[]);
 
     const CommentHandle =  React.useCallback(async () => {     
         const res = await fetchAPI(API_PATHS.createComment,'POST',{post_id : props.post_id, text : comment},true);
         setComment('');
         setSuccess(true);       
-    },[comment])
+    },[comment]);
 
     return (
         <>
@@ -94,7 +97,7 @@ const PostComponent = (props) =>{
                   <div className= "font-semibold">
                     {props.name}
                   </div>
-                  <span className= "text-sm text-gray-500">38m</span>
+                  <span className= "text-sm text-gray-500">{time}</span>
               </div>
           </div>
           <div className= "w-8 h-8 grid place-items-center text-xl text-gray-500 hover:bg-gray-200 dark:text-dark-txt dark:hover:bg-dark-third rounded-full cursor-pointer">
@@ -155,7 +158,7 @@ const PostComponent = (props) =>{
                   </div>
                   <div className= "w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl py-2 rounded-lg cursor-pointer text-gray-500 dark:text-dark-txt">
                       <i className= 'bx bx-share bx-flip-horizontal'></i>
-                      <TableShare />
+                      <TableShare post_id = {props.post_id} />
                   </div>
               </div>
           </div>
