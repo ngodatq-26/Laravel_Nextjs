@@ -19,9 +19,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('password');
             $table->timestamps();
-            $table->string('api_token',80)->after('password')->unique()
-            ->nullable()
-            ->default(null);
             $table->array('info');
             $table->array('friends');//friends of mine
             $table->array('friends_request'); //friends request to me

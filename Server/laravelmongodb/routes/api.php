@@ -34,9 +34,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix'=>'auth'],function($router){
     Route::post('/login',[AuthController::class,'Login']);
     Route::post('/register',[AuthController::class,'Register']);
+    Route::post('/logout',[AuthController::class,'Logout']);
 });
 
-Route::group(['prefix' => 'home','middleware' => ['auth:api']],function($router) {
+Route::group(['prefix' => 'home','middleware' => 'jwtauth'],function($router) {
     Route::post('/search',[HomeController::class,'SearchFriends']);
     Route::get('/friend_request',[HomeController::class,'getFriendsRequest']);
     Route::any('/create_post',[PostController::class,'CreatePost']);
@@ -53,7 +54,7 @@ Route::group(['prefix' => 'home','middleware' => ['auth:api']],function($router)
     Route::get('/get_notifications',[NotificationController::class,'GetNotifications']);
 });
 
-Route::group(['prefix'=>'messages','middleware'=> ['auth:api']],function($router) {
+Route::group(['prefix'=>'messages','middleware'=> ['jwtauth']],function($router) {
     Route::any('/get_rooms',[ChatController::class,'GetAllRooms']);
     Route::any('/create_room',[ChatController::class,'CreateRoom']);
     Route::any('/delete_room',[ChatController::class,'DeleteRoom']);
@@ -62,17 +63,19 @@ Route::group(['prefix'=>'messages','middleware'=> ['auth:api']],function($router
     Route::any('/delete_message',[ChatController::class,'DeleteMessage']);
 });
 
-Route::group(['prefix' => 'profile','middleware' => ['auth:api']],function($router) {
+Route::group(['prefix' => 'profile','middleware' => ['jwtauth']],function($router) {
     Route::any('/',[ProfileController::class,'getProfile']);
     Route::any('/user',[ProfileController::class,'getProfileById']);
 });
 
-Route::group(['prefix' => 'friends','middleware' => ['auth:api']],function($router) {
+Route::group(['prefix' => 'friends','middleware' => 'jwtauth'],function($router) {
     Route::post('/add_pendding',[AddFriendController::class,'SendAddFriend']);
     Route::post('/delete_pendding',[AddFriendController::class,'DeleteAddFriend']);
     Route::post('/cancel',[AddFriendController::class,'NotAcceptRequestFriend']);
     Route::post('/delete',[AddFriendController::class,'DeleteFriend']);
     Route::post('/add',[AddFriendController::class,'AddFriend']);
 });
+
+Route::any('/test',[AuthController::class,'Test']);
 
 

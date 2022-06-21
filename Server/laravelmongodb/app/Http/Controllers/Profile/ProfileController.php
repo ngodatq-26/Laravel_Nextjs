@@ -3,12 +3,14 @@
  
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use \Exception;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller {
     
     public function getProfile() {
-        $auth = auth('api') ->user();
+      try{
+        $auth = auth('api')->user();
         $account = Account::where("_id",$auth->id)->take(1)->get();
         if($account) {
             return response() -> json(["status"=>"200","success"=>"true","data"=>
@@ -25,6 +27,9 @@ class ProfileController extends Controller {
         } else {
             return response()-> json(["status"=>"200","success"=>"true","message"=>"not found"],401);
         }
+      } catch (Exception $e) {
+        return $e;
+      }
     }
 
 

@@ -62,8 +62,7 @@ class AddFriendController extends Controller {
         $account2  = Account::where("_id",$auth->_id)->pull('friends_request',$obj);
         $friend = Account::where("_id",$request->_id)->push('friends',$obj_main);
         $friend = Account::where("_id",$request->_id)->pull('friends_pendding',$obj_main);
-
-        
+  
         return "success";
     }
 

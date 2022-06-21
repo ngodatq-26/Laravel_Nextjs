@@ -141,6 +141,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+    
         App\Providers\AppServiceProvider::class,
         Jenssegers\Mongodb\MongodbServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
@@ -165,7 +166,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        PHPOpenSourceSaver\JWTAuth\Providers\LaravelServiceProvider::class,
         /*
          * Package Service Providers...
          */
