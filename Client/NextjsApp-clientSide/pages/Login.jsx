@@ -12,34 +12,42 @@ import {ACCESS_TOKEN_KEY} from '../utils/constant';
 import {Snackbar} from '@mui/material/Snackbar';
 import Snackbarcustom from '../modules/common/components/SnackbarCustom'
 const SignInForm = dynamic(() => import('../modules/auth/components/SignInForm'));
+import uuid from 'react-uuid'
 
 const SignInPage = ({props}) =>{
 
     const router = useRouter()
     const [loading,setLoading] = React.useState(false);
     const [error,SetError] = React.useState();
+    const [local,setLocal] = React.useState();
     const counter = useSelector((state) => state.authReducer.token);
     const dispatch = useDispatch();
     
-    const onLogin = React.useCallback(async (email,password)=>{
+    navigator.geolocation.getCurrentPosition(function(position) {
+        const a = position.coords.latitude + "-" + position.coords.longitude
+        setLocal(a);
+    }); 
+
+    console.log(local)
+
+    const onLogin = async (email,password)=>{
       setLoading(true);
       await fetchAPI(API_PATHS.login,'POST',{email : email,password : password},true).then(user =>{
         if(user.data.success == "true") {
-          Cookies.set(ACCESS_TOKEN_KEY,user.data.token,{expires : 86400});
+          Cookies.set(ACCESS_TOKEN_KEY,user.data.token,{expires : 365});
           dispatch(setTokenCookies(user.data.token))
-          Router.push('/Home')
         }
         else {
           SetError(user.data.message)
         }
       })
       setLoading(false)
+      Router.push("/Home")
       return;
-    },[])
+    }
 
     const isLogin = React.useMemo(() => Cookies.get(ACCESS_TOKEN_KEY),[]);
     
-  
     return (
         <div>
          { error ?<Snackbarcustom title={error} alert="error"/> : null }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-
+import { convertTime } from '../../../../utils/constant';
 const ShowNotice = (props) => {
   
   const notice = useSelector(state => state.commonReducer.notice);
@@ -27,7 +27,7 @@ const ShowNotice = (props) => {
                             <div className= "ml-3">
                                 <span className= "font-medium text-sm"></span>
                                 <p className= "text-sm">{e.text}</p>
-                                <span className= "text-sm text-blue font-semibold" style={{color: "#1876f2"}}>a few seconds ago</span>
+                                <span className= "text-sm text-blue font-semibold" style={{color: "#1876f2"}}>{convertTime(e.updated_at)}</span>
                             </div>
                             <div>
                                 <svg viewBox="0 0 8 8" fill="currentColor" className = "h-4 w-4 text-blue" style={{color: "#1876f2"}}><circle cx="4" cy="4" r="3"></circle></svg>

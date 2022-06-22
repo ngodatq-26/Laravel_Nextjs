@@ -11,6 +11,7 @@ import { CircularProgress } from '@mui/material';
 import { Modal,Box,Typography } from '@mui/material';
 import {style} from '../../../utils/constant'
 import SnackbarCustom from '../../common/components/SnackbarCustom';
+import { ReadFileImage } from '../../../utils/constant';
 
 const PostStatus = () => {
 
@@ -19,8 +20,8 @@ const PostStatus = () => {
   const [open, setOpen] = React.useState(false);
   const [success,setSuccess] = React.useState(false);
   const [images,setImages] = React.useState([]);
+  const [files,setFiles] = React.useState([]);
   const [loadingPost,setLoadingPost] = React.useState(false);
-  const [loading,setLoading] = React.useState(false);
   const [dataPost,setDataPost] = React.useState(
       {
           title : '',
@@ -38,6 +39,9 @@ const PostStatus = () => {
 
   const postData = async () =>{
       setLoadingPost(true);
+      files.forEach((e) => {
+        post_Images(e)
+      })
       const res = await (await fetchAPI(API_PATHS.createPost,'POST',{...dataPost,images : images},true))
       setLoadingPost(false);
       setSuccess(true);
@@ -59,19 +63,21 @@ const PostStatus = () => {
     const formdata = new FormData();
     formdata.append('image',data);
     if(formdata) {
-        setLoading(true);
         await axios.post('http://localhost:8000/api/home/images_post', formdata, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 "Access-Control-Allow-Origin": "*",
                 Authorization : authchek || '',
             },
-        }).then(e => {
-            setImages([...images,e.data.images])
         })
-        setLoading(false);
     }
   }
+
+  const callback = (file) => {
+    setImages([...images,file])
+  }
+
+  console.log(images)
   
   return (
     <form className="bg-white shadow rounded-lg mb-6 p-4" style={{marginTop : '70px'}}>
@@ -83,7 +89,10 @@ const PostStatus = () => {
             <footer className="flex justify-between mt-2">
                 <div className="flex gap-2">
                     <div>
-                      <input type="file" onChange={(e) => post_Images(e.target.files[0])}></input>
+                      <input type="file" onChange={(e) => {
+                        setFiles([...files,e.target.files[0]])
+                        ReadFileImage(e.target.files[0],callback)
+                      }}></input>
                     </div>
                     <span className="flex items-center transition ease-out duration-300 hover:bg-blue-500 hover:text-white bg-blue-100 w-8 h-8 px-2 rounded-full text-blue-400 cursor-pointer">
                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="css-i6dzq1"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
@@ -121,12 +130,8 @@ const PostStatus = () => {
             </Modal>
             { success ? <SnackbarCustom title="post successfully" alert="success" /> : null }
             <div style={{display : 'flex',flexDirection : 'row'}}>
-                   
-                    {
-                        loading ? <div style={{alignItems : 'center',margin : '40px'}}><CircularProgress /></div> : null 
-                    }
                     <div>{ images[0]  ? 
-                    <ImagesUpload images = {images}/> : null}</div>
+                    <ImagesUpload images = {images} setImages={setImages}/>  : null}</div>
             </div>
     </form>
   )

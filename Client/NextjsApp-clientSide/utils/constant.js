@@ -42,3 +42,12 @@ export function convertTime(time) {
       }
     }
   }
+
+  export function ReadFileImage(file,callback) {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = function() {
+      const url = fileReader.result
+      callback(url)
+    }
+  }

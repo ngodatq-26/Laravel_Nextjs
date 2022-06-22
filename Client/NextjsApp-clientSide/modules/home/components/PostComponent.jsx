@@ -115,7 +115,7 @@ const PostComponent = (props) =>{
                         props.images ? props.images.map((e,index) => {
                             return  (
                                 <div key={index} className=" overflow-hidden rounded-xl col-span-3 max-h-[14rem]">
-                                    <Image className="h-full w-full object-cover " width={500} height={400} src={require(`../../../../../Server/laravelmongodb/storage/app/${e.path}`)} />
+                                    <Image className="h-full w-full object-cover " width={500} height={400} src={e} />
                                 </div>
                             )
                         }) : null

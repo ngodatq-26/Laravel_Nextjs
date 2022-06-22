@@ -26,4 +26,6 @@ export const API_PATHS = {
     likeThisPost : 'http://localhost:8000/api/home/react_post',
     getNotices : 'http://127.0.0.1:8000/api/home/get_notifications',
     shareThisPost : 'http://localhost:8000/api/home/create_share',
+    alert : 'http://localhost:8000/api/home/alert',
+    defineLocation : 'http://127.0.0.1:8000/api/auth/define_location',
 }

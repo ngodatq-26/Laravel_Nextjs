@@ -8,7 +8,17 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <HomePage />
+    <div>redirect...</div>
   )
 }
+
+export async function getServerSideProps(context) {
+    return {
+      redirect: {
+        destination: '/Home',
+        permanent: false,
+      },
+    }
+}
+
 

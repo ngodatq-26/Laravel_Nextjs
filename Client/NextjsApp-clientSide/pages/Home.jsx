@@ -16,6 +16,7 @@ import ProfileMini from '../modules/common/components/ProfileMini/ProfileMini';
 import FriendPendding from '../modules/common/components/FriendsListPending/FriendPendding';
 import ChatBox from '../modules/home/components/ChatBox';
 import { setChatRooms } from '../modules/chat/redux/chatReducer';
+
 const Home = (props) =>{
 
     const [loading,setLoading] = React.useState(false);
@@ -30,6 +31,7 @@ const Home = (props) =>{
       dispatch(setNotice(props.notice))
     },[])
 
+    
     return (
       <div style={{display :'flex',flexDirection : 'column'}}>       
         <HeaderCustom notice={props.notice}/>
@@ -62,8 +64,7 @@ const Home = (props) =>{
         </div> 
         <div style={{position : 'relative',marginTop : '150px'}}>
           <Footer />
-        </div>
-        
+        </div>     
       </div>
     )
 }
