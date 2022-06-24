@@ -12,6 +12,7 @@ import { Modal,Box,Typography } from '@mui/material';
 import {style} from '../../../utils/constant'
 import SnackbarCustom from '../../common/components/SnackbarCustom';
 import { ReadFileImage } from '../../../utils/constant';
+import Preview from './Preview';
 
 const PostStatus = () => {
 
@@ -22,6 +23,7 @@ const PostStatus = () => {
   const [images,setImages] = React.useState([]);
   const [files,setFiles] = React.useState([]);
   const [loadingPost,setLoadingPost] = React.useState(false);
+  const [pre,setPre] = React.useState(true)
   const [dataPost,setDataPost] = React.useState(
       {
           title : '',
@@ -53,6 +55,7 @@ const PostStatus = () => {
       });
       setOpen(false);
       setImages([]);
+      setPre(!pre);
   }
 
   React.useEffect(() => {
@@ -63,7 +66,7 @@ const PostStatus = () => {
     const formdata = new FormData();
     formdata.append('image',data);
     if(formdata) {
-        await axios.post('http://localhost:8000/api/home/images_post', formdata, {
+        await axios.post('http://localhost:8000/api/home/images_post',formdata, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 "Access-Control-Allow-Origin": "*",
@@ -131,7 +134,11 @@ const PostStatus = () => {
             { success ? <SnackbarCustom title="post successfully" alert="success" /> : null }
             <div style={{display : 'flex',flexDirection : 'row'}}>
                     <div>{ images[0]  ? 
-                    <ImagesUpload images = {images} setImages={setImages}/>  : null}</div>
+                    <ImagesUpload images = {images} setImages={setImages}/>  : null}
+                    </div>
+                    { !images[0] ?
+                    <Preview main={dataPost.main} pre={pre} setPre={setPre} /> : null
+                    } 
             </div>
     </form>
   )

@@ -4,7 +4,6 @@ import { convertTime } from '../../../../utils/constant';
 const ShowNotice = (props) => {
   
   const notice = useSelector(state => state.commonReducer.notice);
-  const notices = notice.slice(0).reverse();
   return (<>
    {props.show ?
     <div className= "bg-white mt-40 px-4 py-3 rounded-lg shadow-md max-w-xs" style={{width : '30%',right:'5%',position : 'absolute',marginTop : '5px'}}>
@@ -18,7 +17,7 @@ const ShowNotice = (props) => {
                 </button>
             </div>
             {
-                notices ? notices.map((e,index) => {
+                notice ? notice.slice(0).reverse().map((e,index) => {
                     return (
                         <div className= "flex items-center mt-3 hover:bg-gray-100 rounded-lg px-1 py-1 cursor-pointer" key={index}>
                             <div className= "flex flex-shrink-0 items-end">

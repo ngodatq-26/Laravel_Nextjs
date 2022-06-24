@@ -12,6 +12,7 @@ import SnackbarCustom from '../../common/components/SnackbarCustom';
 import TableShare from './TableShare';
 import { Modal } from 'antd';
 import { convertTime } from '../../../utils/constant';
+import Preview from './Preview';
 
 const PostComponent = (props) =>{
 
@@ -122,6 +123,7 @@ const PostComponent = (props) =>{
                     }
       </div>
       </div>
+      <Preview main={props.post_main} />
       
       <div className= "px-4 py-2">
           <div className= "flex items-center justify-between">
