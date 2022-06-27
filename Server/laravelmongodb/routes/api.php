@@ -34,6 +34,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix'=>'auth'],function($router){
     Route::post('/login',[AuthController::class,'Login']);
     Route::post('/register',[AuthController::class,'Register']);
+    Route::post('/define_location',[AuthController::class,'definedLocation']);
     Route::post('/logout',[AuthController::class,'Logout']);
 });
 
@@ -52,6 +53,7 @@ Route::group(['prefix' => 'home','middleware' => 'jwtauth'],function($router) {
     Route::post('/get_count_react',[ReactController::class,'getAllReacts']);
     Route::post('/create_share',[ShareController::class,'CreateShare']);
     Route::get('/get_notifications',[NotificationController::class,'GetNotifications']);
+    Route::get('/alert',[HomeController::class,'AlertStrangerLogin']);
 });
 
 Route::group(['prefix'=>'messages','middleware'=> ['jwtauth']],function($router) {

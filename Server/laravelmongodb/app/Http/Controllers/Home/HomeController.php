@@ -33,5 +33,21 @@ class HomeController extends Controller {
     public function Test() {
       return 'ok';
     }
+
+    public function AlertStrangerLogin() {
+      $auth = auth('api')->user();
+      if (count($auth->location) >=2) {
+        return response()->json(["message" => 'have a device login by your account!!!',
+                                  "success"=>"true",
+                                  "data"=> $auth->location,
+                                ],201);
+      } else {
+        return response()->json(["message" => 'OK!!!',
+                                  "success"=>"true",
+                                  "data"=> $auth->location,
+                                ],201);
+      }
+    }
+
 }
 

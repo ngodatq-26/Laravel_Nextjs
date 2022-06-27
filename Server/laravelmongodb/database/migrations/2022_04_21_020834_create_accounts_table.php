@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('password');
             $table->timestamps();
+            $table->array('location');
             $table->array('info');
             $table->array('friends');//friends of mine
             $table->array('friends_request'); //friends request to me

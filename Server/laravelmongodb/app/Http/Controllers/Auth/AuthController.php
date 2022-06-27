@@ -52,6 +52,7 @@ class AuthController extends Controller
          $account->friends = [];
          $account->friends_pendding = [];
          $account->info = [];
+         $account->location = [];
          $account->friends_request = [];
          $account->rooms = [];
          $check = Account::where('email',$request->email)->first();
@@ -84,5 +85,19 @@ class AuthController extends Controller
         }   
      }
 
-     
+     public function definedLocation(Request $request) {
+        try {
+            $account = Account::where('email',$request->email)->get();          
+            if(!in_array($request->location,$account[0]->location)) {
+                $account = Account::where('email',$request->email)->push('location',$request->location);
+            }
+            return response()->json([
+                "success" => true,
+                "message" => "location succesfully",
+                "info" => $account
+            ],201);
+        } catch (Exception $e) {
+            return $account;
+        }
+     }
  }
