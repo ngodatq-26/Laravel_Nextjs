@@ -23,7 +23,6 @@ const Home = (props) =>{
     const state = useSelector(state => state)
     const dispatch = useDispatch();
 
-    console.log(props)
     React.useEffect(() =>{
       dispatch(setShowRoom(""));
       dispatch(setUserAction(props.data))

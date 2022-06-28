@@ -38,14 +38,12 @@ export default function TableShare(props) {
         list.push(a[i].value);
       }
     }
-    console.log(list)
     if(list.length >= 1) {
       const res1 = await fetchAPI(API_PATHS.shareThisPost,'POST',{
         post_id : props.post_id,
         send_to : list,
         text : text
       },true)
-      console.log(res1);
       setRes(res1.data.message)
       setStatus(res1.data.status)
       setOpen(false)
@@ -59,7 +57,6 @@ export default function TableShare(props) {
     },3000)
   },[status])
 
-  console.log(friends)
   return (
     <div>
       <span className= "text-sm font-semibold" onClick={handleOpen}>share</span>

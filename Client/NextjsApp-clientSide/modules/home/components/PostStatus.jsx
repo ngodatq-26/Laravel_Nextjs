@@ -81,8 +81,6 @@ const PostStatus = () => {
   const callback = (file) => {
     setImages([...images,file])
   }
-
-  console.log(images)
   
   return (
     <form className="bg-white shadow rounded-lg mb-6 p-4" style={{marginTop : '70px'}}>

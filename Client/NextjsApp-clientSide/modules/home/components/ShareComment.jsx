@@ -6,7 +6,6 @@ const ShareComment = () => {
  const user = useSelector(state =>state.commonReducer.user);
 
  const friends = user.friends;
- console.log(friends )
   return ( 
         <div style={{    width: '300px',
             position: 'absolute',

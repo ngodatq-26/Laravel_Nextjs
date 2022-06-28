@@ -16,7 +16,6 @@ const Preview = (props) => {
         checkUrl(props.main,callback)
     },[props.main]);
 
-    console.log(preview)
   return (
   <>
     {preview ?

@@ -36,8 +36,6 @@ const PostComponent = (props) =>{
 
     const time = React.useMemo(() => convertTime(props.updated_at));
 
-    console.log(friends)
-
     React.useEffect(() => {
         async function getAllLike() {
             const res = await fetchAPI(API_PATHS.getAllLike,'POST',{post_id : props.post_id},true);
@@ -95,7 +93,6 @@ const PostComponent = (props) =>{
 
     //share when @ on comment
     const handleShare = () => {   
-        console.log('test')
         const cb = () => {
             setShowShare(true)
         }
@@ -105,7 +102,6 @@ const PostComponent = (props) =>{
         checkShare(comment,cb,cb2);
     }
 
-    console.log(showShare)
     React.useEffect(() => {
         handleShare()
     },[comment])
@@ -120,19 +116,17 @@ const PostComponent = (props) =>{
         ChangeInputEmoticon(comment,emotionCallback);  
         if(emoji) {
           const a = comment.split(' ');
-          console.log(a);
           a.pop();
           a.pop();
           a.push(emoji);
-          console.log(a);
           var s ='';
           for(let i = 0;i<a.length;i++) {
-            s = s + a[i];
+            s = s + ' ' + a[i];
           }
           setComment(s);
           setEmoji();
         }
-      },[comment])
+    },[comment])
 
     return (
         <>

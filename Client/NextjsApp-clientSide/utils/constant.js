@@ -60,10 +60,7 @@ export function ReadFileImage(file,callback) {
 export const checkUrl = (input,callback) => {
     const a = input.split(' ');
     for(let i = 0;i<a.length;i++) {
-        console.log(a[i])
-        console.log(isValidHttpUrl(a[i]))
         if(isValidHttpUrl(a[i]) == true) {
-            console.log(a[i])
             fetchDataFromUrl(a[i],callback)
         }
     }
@@ -74,7 +71,6 @@ export function isValidHttpUrl(string) {
     let url; 
     try {
       url = new URL(string);
-      console.log(url)
     } catch (_) {
       return false;  
     }
@@ -85,7 +81,6 @@ export function isValidHttpUrl(string) {
 export const fetchDataFromUrl = async (str,callback) => {
   try {
     const res = await parse(str).then(e =>{
-      console.log(e);
       callback(e)
     })
   } catch (err) {

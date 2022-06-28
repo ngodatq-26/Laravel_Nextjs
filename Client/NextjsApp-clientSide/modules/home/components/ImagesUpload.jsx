@@ -9,7 +9,6 @@ const ImagesUpload = (props) => {
     const listcheck = list.filter(function(ele){
       return ele != e
     })
-    console.log('delete')
     props.setImages(listcheck)
   }
   return (
