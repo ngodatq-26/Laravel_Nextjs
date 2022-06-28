@@ -16,6 +16,7 @@ import Preview from './Preview';
 
 const PostStatus = () => {
 
+  
   const token = Cookies.get(ACCESS_TOKEN_KEY);
   const authchek = "Bearer " + token;
   const [open, setOpen] = React.useState(false);
@@ -58,6 +59,7 @@ const PostStatus = () => {
       setPre(!pre);
   }
 
+  
   React.useEffect(() => {
       setTimeout(() => setSuccess(false),3000)
   },[success]);

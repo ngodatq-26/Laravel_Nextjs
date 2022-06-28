@@ -40,4 +40,4 @@ const Preview = (props) => {
   )
 }
 
-export default Preview
+export default React.memo(Preview)

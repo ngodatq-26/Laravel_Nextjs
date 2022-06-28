@@ -1,3 +1,4 @@
+import { emoticon } from "emoticon";
 import { parse } from "html-metadata-parser";
 export const DATABASE_HOST = 27017;
 export const MONGODB_URI = 'mongodb+srv://ngoquangdatjpnd:Datdatdat@cluster0.ynxku.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
@@ -92,3 +93,41 @@ export const fetchDataFromUrl = async (str,callback) => {
     
   }
 }
+
+export const checkShare = (input,callback,callback2) => {
+  if(input) {
+  const a = input.split(' ');
+  for(let i = 0;i<a.length;i++) {
+    if(a[i] === '@') {
+      callback();
+    }
+    else {
+      callback2()
+    }
+  } 
+} else {callback2()}
+}
+
+export const ChangeToEmoticon = (input,callback) => {
+  emoticon.forEach((e,index) => {
+    if(e) {
+      e.emoticons.forEach((f) => {
+        if(f == input) {
+          callback(e.emoji)
+          return true;
+        }
+      })
+    }
+  })
+  return false;
+}
+
+export const ChangeInputEmoticon = (input,callback) => {
+  if(input) {
+    const a = input.split(' ');
+    for(let i = 0;i<a.length;i++) {
+        ChangeToEmoticon(a[i],callback);
+    }
+  }
+}
+

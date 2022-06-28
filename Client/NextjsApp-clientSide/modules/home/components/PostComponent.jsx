@@ -11,11 +11,15 @@ import Echo from 'laravel-echo';
 import SnackbarCustom from '../../common/components/SnackbarCustom';
 import TableShare from './TableShare';
 import { Modal } from 'antd';
-import { convertTime } from '../../../utils/constant';
+import { checkShare, convertTime } from '../../../utils/constant';
 import Preview from './Preview';
+import { useSelector } from 'react-redux';
+import ShareComment from './ShareComment';
+import { ChangeInputEmoticon } from '../../../utils/constant';
 
 const PostComponent = (props) =>{
 
+    const friends = useSelector(state => state.commonReducer.friends)
     const [loading,setLoading] = React.useState(false);
     const [dataComment,setDataComment] = React.useState([]); 
     const [comment,setComment] = React.useState();
@@ -26,8 +30,13 @@ const PostComponent = (props) =>{
     const [countLike,setCountLike] = React.useState();
     const [button,setButton] = React.useState(false);
     const [mount,setMount] = React.useState(5);
+    const [showShare,setShowShare] = React.useState(false);//state check share by @ comment
+    const [friendShare,setFriendShare] = React.useState();
+    const [emoji,setEmoji] = React.useState();
 
     const time = React.useMemo(() => convertTime(props.updated_at));
+
+    console.log(friends)
 
     React.useEffect(() => {
         async function getAllLike() {
@@ -84,10 +93,51 @@ const PostComponent = (props) =>{
         setSuccess(true);       
     },[comment]);
 
+    //share when @ on comment
+    const handleShare = () => {   
+        console.log('test')
+        const cb = () => {
+            setShowShare(true)
+        }
+        const cb2 = () => {
+            setShowShare(false)
+        }
+        checkShare(comment,cb,cb2);
+    }
+
+    console.log(showShare)
+    React.useEffect(() => {
+        handleShare()
+    },[comment])
+
+    
+
+    const emotionCallback = (e) => {
+        setEmoji(e);
+    }
+
+    React.useEffect(() => {
+        ChangeInputEmoticon(comment,emotionCallback);  
+        if(emoji) {
+          const a = comment.split(' ');
+          console.log(a);
+          a.pop();
+          a.pop();
+          a.push(emoji);
+          console.log(a);
+          var s ='';
+          for(let i = 0;i<a.length;i++) {
+            s = s + a[i];
+          }
+          setComment(s);
+          setEmoji();
+        }
+      },[comment])
+
     return (
         <>
       {loading  ? <Skeleton /> : 
-      <div className= "shadow bg-white dark:bg-dark-second dark:text-dark-txt mt-4 rounded-lg">
+    <div style={{position : 'relative'}} className= "shadow bg-white dark:bg-dark-second dark:text-dark-txt mt-4 rounded-lg">
       <div className= "flex items-center justify-between px-4 py-2">
           <div className= "flex space-x-2 items-center">
               <div className= "relative">
@@ -175,13 +225,13 @@ const PostComponent = (props) =>{
                 loadingComment ? <Skeleton /> : null
             } 
       </div>
-
+      {showShare ? <ShareComment setFriendShare={setFriendShare} /> : null}     
       <div className= "py-2 px-4">
           <div className= "flex space-x-2">
               <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" alt="Profile picture" className= "w-9 h-9 rounded-full" />
               <div className= "flex-1 flex bg-gray-100 dark:bg-dark-third rounded-full items-center justify-between px-3">
                   <input type="text" value={comment}
-                     onChange = {(e) => setComment(e.target.value)}
+                     onChange = {(e) => {setComment(e.target.value)}}
                      placeholder="Write a comment..." className= "outline-none bg-transparent flex-1" />
                   <div className= "flex space-x-0 items-center justify-center">
                       <span className= "w-7 h-7 grid place-items-center rounded-full hover:bg-gray-200 cursor-pointer text-gray-500 dark:text-dark-txt dark:hover:bg-dark-second text-xl"><i className= 'bx bx-smile'></i></span>
@@ -193,8 +243,10 @@ const PostComponent = (props) =>{
                       </button>
                   </div>
               </div>
+              
           </div>
       </div>
+      
       {
                 success ? <SnackbarCustom title="comment successfully" error="success" /> : null
       }
